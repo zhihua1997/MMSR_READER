@@ -32,14 +32,14 @@ export const loginUser = ({ email, password }) => {
     })
       .then(response => response.json())
       .then(responseJson => {
-        console.log(responseJson);
+        console.log(responseJson.userName());
         if (responseJson === "Invalid Username or Password Please Try Again") {
           Alert.alert("Invalid Password or Email");
           loginUserFail(dispatch);
         } else {
          loginUserSuccess(dispatch, responseJson);
-          Alert.alert("Welcome" + responseJson.name);
-          Actions.main();
+          Alert.alert("Welcome " + responseJson.userName);
+          Actions.main(); 
         }
       })
       .catch(error => {
