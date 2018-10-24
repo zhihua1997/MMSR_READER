@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 import Router from './Router';
+import reducers from './reducers';
+
 
 export default class App extends Component {
     
     render() {
+        const store = createStore(reducers, applyMiddleware(ReduxThunk));
         return (
-            <Router />
+            <Provider store={store}>
+                <Router />
+            </Provider>
         );
     }
 }
 
-const styles = {
-    image: {
-        flex: 1,
-        alignItem: 'center',
-        justifyContent: 'cenetr',
-    },
-
-    inner: {
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(52, 52, 52, 0.8)'
-    }
-}

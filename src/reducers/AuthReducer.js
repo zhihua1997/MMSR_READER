@@ -1,4 +1,5 @@
-import { EMAIL_CHANGE, PASSWORD_CHANGE, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS } from '../actions/types';
+import { EMAIL_CHANGE, PASSWORD_CHANGE, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS }
+ from '../actions/types';
 
 const INITIAL_STATE = {
     email: '',

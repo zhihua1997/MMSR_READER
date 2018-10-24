@@ -6,7 +6,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { Button } from "./tools/button"
+import { Button } from "./tools/button";
 import {
   Container,
   Content,
@@ -16,8 +16,9 @@ import {
   Label,
 } from "native-base";
 import { Actions } from "react-native-router-flux";
-import { emailChanged, passwordChange, loginUser} from '../actions'
-
+import { emailChanged, passwordChange, loginUser} from '../actions';
+import { connect } from 'react-redux';
+import { strings } from '../localization'
 
 class LoginForm extends Component {
   constructor(props){
@@ -70,6 +71,8 @@ class LoginForm extends Component {
       <Container style={styles.formStyle}>
           <Content>
             <Form>
+
+              <Text>{strings.how}</Text>
               <Item floatingLabel>
                 <Label>Email</Label>
                 <Input onChangeText={email => this.setState({ email })} />
@@ -108,4 +111,16 @@ const styles = {
     height: 30
   }
 };
-export default LoginForm;
+
+const mapStateToProps = state => {
+  const { email, password, loading } = state.auth;
+
+  return { email, password, loading };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    emailChanged, passwordChange, loginUser
+  }
+)(LoginForm);

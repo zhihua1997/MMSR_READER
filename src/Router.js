@@ -4,15 +4,21 @@ import { Router, Scene, Actions, ActionConst } from 'react-native-router-flux';
 import LoginScreen from './component/LoginScreen';
 import SecondScreen from './component/SecondScreen';
 import RegisterForm from './component/RegisterForm';
+import FirstPage from './component/FirstPage'
 
 const RouterComponent = () => {
 	  return (
 	    <Router>
+				
 	      <Scene key="root">
-	        <Scene key="loginScreen"
-	          component={LoginScreen}
+				<Scene key="firstPage"
+	          component={FirstPage}
 	          hideNavBar={true}
               initial
+	        />
+
+	        <Scene key="loginScreen"
+	          component={LoginScreen}
 	        />
 
 					<Scene key="register"
