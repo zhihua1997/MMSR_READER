@@ -10,25 +10,33 @@ class FirstPage extends Component {
         strings.setLanguage('en');
         this.setState({});
         Actions.loginScreen();
+        
     }
     overLangBM = () => {
-        strings.setLanguage('it');
+        strings.setLanguage('bm');
         this.setState({});
         Actions.loginScreen();
     }
     overLangCN = () => {
-        strings.setLanguage('en');
+        strings.setLanguage('cn');
         this.setState({});
         Actions.loginScreen();
     }
+    overLangTM = () => {
+        strings.setLanguage('tm');
+        this.setState({});
+        Actions.loginScreen();
+    }
+    
 
     render() {
         return (
             <Container style={styles.containerStyle}>
-                <Content>
+                <Content style={styles.contentStyle}>
                     <Button onPress={this.overLangEN.bind(this)}>English</Button>
-                    <Button onPress={this.overLangBM.bind(this)}>简单中文</Button>
-                    <Button onPress={this.overLangCN.bind(this)}>Bahasa</Button>
+                    <Button onPress={this.overLangCN.bind(this)}>简单中文</Button>
+                    <Button onPress={this.overLangBM.bind(this)}>Bahasa</Button>
+                    <Button onPress={this.overLangTM.bind(this)}>தமிழ்</Button>
                 </Content>
             </Container>
         );
@@ -41,8 +49,12 @@ const styles = {
         alignItems: "center",
         justifyContent: "center",
         height: 1500,
-        marginTop: 50
     },
+    contentStyle: {
+        width: 350,
+        marginTop: 80,
+    },
+   
 };
 
 export default FirstPage;

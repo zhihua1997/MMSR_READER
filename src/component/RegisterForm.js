@@ -18,6 +18,7 @@ import { Actions } from "react-native-router-flux";
 //import CheckBox from 'react-native-check-box'; // need to uninstall
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import { strings } from '../localization';
 
 const items = [
   {  
@@ -150,21 +151,21 @@ class RegisterForm extends Component {
         <Content>
           <Form>
             <Item fixedLabel>
-              <Input placeholder="Name" onChangeText={name => this.setState({ name })} />
+              <Input placeholder={strings.name} onChangeText={name => this.setState({ name })} />
             </Item>
             <Item>
-              <Input placeholder="Email" onChangeText={email => this.setState({ email })} />
+              <Input placeholder={strings.email} onChangeText={email => this.setState({ email })} />
             </Item>
             <Item>
-              <Input secureTextEntry placeholder="password" />
+              <Input secureTextEntry placeholder={strings.password} />
             </Item>
             <Item>
-              <Input secureTextEntry placeholder="Re-enter Password" onChangeText={password => this.setState({ password })} />
+              <Input secureTextEntry placeholder={strings.rePassword} onChangeText={password => this.setState({ password })} />
             </Item>
             <Item />
             <CardSection>
             <TouchableOpacity onPress={this._showDateTimePicker}>
-                <Text style={styles.dobButton}>Show DatePicker</Text>
+                <Text style={styles.dobButton}>{strings.showDatePicker}</Text>
               </TouchableOpacity>
               <DateTimePicker
                 isVisible={this.state.isDateTimePickerVisible}
@@ -174,20 +175,20 @@ class RegisterForm extends Component {
             </CardSection>
             </Form>
             <CardSection>
-              <Text style={styles.textStyle}>Your proficient language:</Text>
+              <Text style={styles.textStyle}>{strings.languageProficient}</Text>
             </CardSection>
                 <SectionedMultiSelect
                   styles={{ width: 200, marginLeft: 15 }}
                   items={items} 
                   uniqueKey='id'
-                  selectText='Choose your languages'
+                  selectText= {strings.chooseLanguage}
                   hideSearch= {true}
                   onSelectedItemsChange={this.onSelectedItemsChange}
                   selectedItems={this.state.selectedItems}
                 />
             <CardSection>
               {this.state.iOSselectedItems}
-              <Button onPress={this.onRegister.bind(this)}>Register</Button>
+              <Button onPress={this.onRegister.bind(this)}>{strings.register}</Button>
             </CardSection>
           
         </Content>

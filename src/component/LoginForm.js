@@ -71,22 +71,20 @@ class LoginForm extends Component {
       <Container style={styles.formStyle}>
           <Content>
             <Form>
-
-              <Text>{strings.how}</Text>
               <Item floatingLabel>
-                <Label>Email</Label>
+                <Label>{strings.email}</Label>
                 <Input onChangeText={email => this.setState({ email })} />
               </Item>
               <Item floatingLabel last>
-                <Label>Password</Label>
+                <Label>{strings.password}</Label>
                 <Input
                   secureTextEntry
                   onChangeText={password => this.setState({ password })}
                 />
               </Item>
             </Form>
-            <Button onPress={this.loginFunction}> Sign In </Button>
-            <Button onPress={() => Actions.register()}> Sign Up </Button>
+            <Button onPress={this.loginFunction}>{strings.signIn}</Button>
+            <Button onPress={() => Actions.register()}>{strings.signUp}</Button>
           </Content>
         </Container>
       </Container>

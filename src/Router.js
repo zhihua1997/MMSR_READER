@@ -4,7 +4,8 @@ import { Router, Scene, Actions, ActionConst } from 'react-native-router-flux';
 import LoginScreen from './component/LoginScreen';
 import SecondScreen from './component/SecondScreen';
 import RegisterForm from './component/RegisterForm';
-import FirstPage from './component/FirstPage'
+import FirstPage from './component/FirstPage';
+import { strings } from './localization';
 
 const RouterComponent = () => {
 	  return (
@@ -13,12 +14,14 @@ const RouterComponent = () => {
 	      <Scene key="root">
 				<Scene key="firstPage"
 	          component={FirstPage}
-	          hideNavBar={true}
-              initial
+						title = "MMSR Reader"
+							initial
+							navigationBarStyle={{ backgroundColor: '#add8e6', height: 70 }}
 	        />
 
 	        <Scene key="loginScreen"
-	          component={LoginScreen}
+						component={LoginScreen}
+						title = { strings.loginPage }
 	        />
 
 					<Scene key="register"
