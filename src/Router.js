@@ -6,7 +6,7 @@ import RegisterForm from './component/RegisterForm';
 import FirstPage from './component/FirstPage';
 import { strings } from './localization';
 import Downloaded from './component/Downloaded';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const myIcon = (<Icon name="ellipsis-v" style={{ marginRight: 20 }} size={50} color="#000" />);
