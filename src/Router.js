@@ -9,6 +9,7 @@ import Downloaded from './component/Downloaded';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
+
 const myIcon = (<Icon name="ellipsis-v" style={{ marginRight: 20 }} size={50} color="#000" />);
 
 const RouterComponent = () => {
@@ -38,11 +39,12 @@ const RouterComponent = () => {
 	        />
 					<Scene key="downloaded"
 						component={Downloaded}
-					
-						onRight = { () => { Actions.firstPage(); }}
-						renderRightButton = {<Icon name="ellipsis-v" size={30} color="#000" style={ { marginRight: 10 } } />}
+						title = "Downloaded"
+						renderRightButton = {<Icon name="ellipsis-v" size={30} color="#000" style={ { marginRight: 10 } } onPress={() => Actions.firstPage()} />}
 					/>
+					
 	      </Scene>
+				
 	    </Router>
 	  );
 };
