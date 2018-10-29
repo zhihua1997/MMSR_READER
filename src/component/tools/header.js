@@ -1,12 +1,27 @@
-import React from 'C:/Users/User/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react';
+import React from 'react';
 import { Text, View } from 'react-native';
+import NavigationBar from 'react-native-navbar';
+import Icon from 'react-native-vector-icons/FontAwesome'
+import { Actions } from "react-native-router-flux";
+
+
+
 
 const Header = (props) => {
-
     const { textStyle, viewStyle } = styles;
     return ( 
     <View style={viewStyle}>
-        <Text style={textStyle}>{props.headerText}</Text>
+
+    <NavigationBar
+    title={props.HeaderText}
+    /*rightButton={
+        <Icon name='ellipsis-v' onPress={() => Actions.firstPage()} size={30} color="#000"/>
+    }
+    leftButton={
+      <Icon name='angle-left' onPress={() =>{ Actions.firstPage()}} />
+    }*/
+    style={styles.navbarStyle}
+  />     
     </View>
     );
 };  

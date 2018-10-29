@@ -16,49 +16,27 @@ import {
   Label,
 } from "native-base";
 import { Actions } from "react-native-router-flux";
-import { emailChanged, passwordChange, loginUser} from '../actions';
+import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { connect } from 'react-redux';
 import { strings } from '../localization'
 
 class LoginForm extends Component {
-  constructor(props){
-   super(props);
-   
+
+  onEmailChange(text) {
+    this.props.emailChanged(text);
+  }
+
+  onPasswordChange(text) {
+    this.props.passwordChanged(text);
+  }
+
+  loginFunction() {
+    const { email, password } = this.props;
+
+    this.props.loginUser({ email, password });
   }
 
   
-
-  loginFunction = () => {
-    const { email } = this.state;
-    const { password } = this.state;
-
-    fetch("http://tarucmmsr.pe.hu/readerLogin.php", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    })
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson);
-        if (responseJson === "Invalid Username or Password Please Try Again") {
-          Alert.alert("Invalid Password or Email");
-        } else {
-          Alert.alert("Welcome");
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-
-      Keyboard.dismiss();
-     };
-
   render() {
     return (
       <Container
@@ -73,17 +51,22 @@ class LoginForm extends Component {
             <Form>
               <Item floatingLabel>
                 <Label>{strings.email}</Label>
-                <Input onChangeText={email => this.setState({ email })} />
+                <Input
+                  onChangeText={this.onEmailChange.bind(this)}
+                  value={this.props.email}
+                  keyboardType={"email-address"}
+                />
               </Item>
               <Item floatingLabel last>
                 <Label>{strings.password}</Label>
                 <Input
                   secureTextEntry
-                  onChangeText={password => this.setState({ password })}
+                  onChangeText={this.onPasswordChange.bind(this)}
+                  value={this.props.password}
                 />
               </Item>
             </Form>
-            <Button onPress={this.loginFunction}>{strings.signIn}</Button>
+            <Button onPress={this.loginFunction.bind(this)}>{strings.signIn}</Button>
             <Button onPress={() => Actions.register()}>{strings.signUp}</Button>
           </Content>
         </Container>
@@ -119,6 +102,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    emailChanged, passwordChange, loginUser
+    emailChanged, passwordChanged, loginUser
   }
 )(LoginForm);

@@ -9,7 +9,7 @@ export const emailChanged = (text) => {
     };
 };
 
-export const passwordChange = (text) => {
+export const passwordChanged = (text) => {
     return {
         type: PASSWORD_CHANGE,
         payload: text
@@ -18,7 +18,6 @@ export const passwordChange = (text) => {
 
 export const loginUser = ({ email, password }) => {
     return dispatch => {
-
      fetch("http://tarucmmsr.pe.hu/readerLogin.php", {
       method: "POST",
       headers: {
@@ -32,14 +31,14 @@ export const loginUser = ({ email, password }) => {
     })
       .then(response => response.json())
       .then(responseJson => {
-        console.log(responseJson.userName());
         if (responseJson === "Invalid Username or Password Please Try Again") {
-          Alert.alert("Invalid Password or Email");
+          Alert.alert("Invalid email or Password");
           loginUserFail(dispatch);
         } else {
-         loginUserSuccess(dispatch, responseJson);
-          Alert.alert("Welcome " + responseJson.userName);
-          Actions.main(); 
+          //console.log(responseJson);
+          loginUserSuccess(dispatch, responseJson);
+          Alert.alert("Welcome " + responseJson.userName );
+          Actions.downloaded();
         }
       })
       .catch(error => {
