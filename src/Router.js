@@ -14,6 +14,8 @@ import Drawer1 from './drawer/drawer1';
 import Drawer2 from './drawer/drawer2';
 
 
+
+
 const MenuIcon = () => {
 	return (
 		<Icon name="navicon" size={30} />
@@ -38,6 +40,8 @@ const RouterComponent = () => {
 					title={strings.loginPage}
 				/>
 
+				
+
 				<Scene key="register"
 					component={RegisterForm}
 					hideNavBar={true}
@@ -46,8 +50,6 @@ const RouterComponent = () => {
 					component={SecondScreen}
 					hideNavBar={true}
 				/>
-
-				
 
 				<Scene
 				initial
@@ -58,6 +60,8 @@ const RouterComponent = () => {
 					drawerWidth={300}
 					hideNavBar
 				>
+
+				
 				<Scene key="downloaded"
 					component={Downloaded}
 					title="Downloaded"

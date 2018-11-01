@@ -25,6 +25,7 @@ class menu extends Component {
                                 <Text>Menu 2</Text>
                             </ListItem>
                         </List>
+                       
                     </Content>
                 </View>
             </View>

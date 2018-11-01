@@ -1,3 +1,3 @@
 export * from './button';
 export * from './CardSection';
-export * from './header';
+export * from './Header';

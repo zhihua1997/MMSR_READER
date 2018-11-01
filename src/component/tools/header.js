@@ -1,30 +1,16 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import NavigationBar from 'react-native-navbar';
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { Actions } from "react-native-router-flux";
 
-
-
-
+//if you have multiple jsx code, then return need to use ()
 const Header = (props) => {
     const { textStyle, viewStyle } = styles;
-    return ( 
-    <View style={viewStyle}>
 
-    <NavigationBar
-    title={props.HeaderText}
-    /*rightButton={
-        <Icon name='ellipsis-v' onPress={() => Actions.firstPage()} size={30} color="#000"/>
-    }
-    leftButton={
-      <Icon name='angle-left' onPress={() =>{ Actions.firstPage()}} />
-    }*/
-    style={styles.navbarStyle}
-  />     
-    </View>
+    return (
+        <View style={viewStyle}>
+            <Text style={textStyle}>{props.headerText}</Text>
+        </View>
     );
-};  
+};
 
 const styles = {
     viewStyle: {
@@ -33,9 +19,11 @@ const styles = {
         alignItems: 'center',
         height: 60,
         paddingTop: 15,
+
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2},
-        shadowOpacity: 0.2,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+
         elevation: 2,
         position: 'relative'
     },
@@ -44,4 +32,11 @@ const styles = {
     }
 };
 
-export default Header;
+//component do not need register, 
+//only the root(index/App) has to register it
+//this line of code export the header function able use in anyway within the app
+
+//export default Header;
+
+//when using the export * from './component/common/Header' the * focus cannot use default keyword and must be destruture the it component
+export { Header };

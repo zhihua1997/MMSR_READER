@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View,FlatList } from 'react-native';
 import { Header } from './tools';
 import { Button } from './tools';
 import {
@@ -12,13 +12,17 @@ import {
 } from "native-base";
 import { Actions } from "react-native-router-flux";
 import Top from './Top'
+import ContentStory from './ContentStory';
 
 
 class Downloaded extends Component {
     render() {
-        return ( 
-          <Top/>
-            
+        return (
+            <Container>
+            <Top />
+            <Header headerText="Your StoryBook" />
+            <ContentStory />
+            </Container>
         );
     }
 }
