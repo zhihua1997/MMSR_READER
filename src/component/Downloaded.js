@@ -11,15 +11,14 @@ import {
   Label,
 } from "native-base";
 import { Actions } from "react-native-router-flux";
+import Top from './Top'
+
 
 class Downloaded extends Component {
     render() {
         return ( 
-            <Container>
-                <Content>
-                <Text>HI</Text>
-                </Content>
-            </Container>
+          <Top/>
+            
         );
     }
 }
