@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, View, FlatList, Dimensions, TouchableNativeFeedback, AsyncStorage } from 'react-native';
+import { Image, StyleSheet, Text, View, FlatList, Dimensions, TouchableNativeFeedback, AsyncStorage, TouchableOpacity } from 'react-native';
 import Top from './Top';
 import { SearchBar } from 'react-native-elements';
 import _ from 'lodash';
 import { Actions } from "react-native-router-flux";
-import { Thumbnail } from 'native-base';
+import { Thumbnail, Container, Content } from 'native-base';
+import { Input } from '../tools';
+import { getStoryContent } from "../actions";
+import { connect } from 'react-redux';
 
 /*const data = [
     { key: 'A'}, { key: 'B'}, { key: 'C'}, { key: 'D'}, { key: 'E'}, { key: 'F'}, { key: 'G'}, { key: 'H'},
@@ -26,7 +29,6 @@ const formatData = ( data, numColumns) => {
 const numColumns = 3;
 const num = 0
 class ContentStory extends Component {
-    
     constructor(props){
         super(props);
 
@@ -40,6 +42,8 @@ class ContentStory extends Component {
             fullData: formatData(data, numColumns),*/
         };
     }
+
+    
 
     componentDidMount() {
         AsyncStorage.getItem("storybook_token").then(token =>{
@@ -56,10 +60,21 @@ class ContentStory extends Component {
                 data: formatData(Alldata, numColumns),
                 loading: token !== null,
             });
-            console.log(this.state.data);
+            //console.log(this.state.data);
         });
 
     }
+
+    getContentFunction() {
+        const { storybookID } = this.props;
+        console.log(this.props.storybookID);
+        //storybookID, languageCode = this.props;
+
+        //this.props.getStoryContent({ storybookID, languageCode });
+
+        //console.log(storybookID, languageCode);
+    }
+    
 
     handleSearch = text => {
         const formatQuery = text.toLowerCase();
@@ -86,16 +101,16 @@ class ContentStory extends Component {
         if (item.empty === true){
             return <View style={[styles.item, styles.itemInvisible]}/>;
         }
-        return (
-            
-            <View style={styles.item} >
+        return ( 
+        <TouchableOpacity onPress={this.getContentFunction.bind(this)} style={styles.item}>
+        <Text value={this.props.storybookID}>{item.storybookID}</Text>
+            <View style={styles.item}>
                 <Image style={{width: 66, height: 58}} 
                 source={{uri:'data:image/png;base64,'+ item.coverPage }}/>
                <Text style={styles.itemText}>{item.title}</Text>
-               <Text style={styles.itemText}>{item.storybookID}</Text>
             </View>
+        </TouchableOpacity>
         );
-
     }
 
    /* renderTitle() {
@@ -141,4 +156,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ContentStory; 
+export default connect(null, { getStoryContent })(ContentStory); 

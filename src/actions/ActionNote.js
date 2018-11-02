@@ -1,16 +1,27 @@
-import { NO_STORYBOOK, SHOW_STORYBOOK } from "./types";
+import { GET_STORYCONTENT, NO_STORYCONTENT } from "./types";
 
 
-export const getStoryBook = () => {
+export const getStoryContent = ({ storybookId, languageCode }) => {
     return dispatch => {
-        fetch("http://tarucmmsr.pe.hu/get_storybook_translate_list.php")
+        fetch("http://tarucmmsr.pe.hu/get_translate_page.php", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                storybookId: storybookId,
+                languageCode: languageCode
+            })
+        })
         .then((response) => response.json())
         .then((responseJson) => {
             if (responseJson === null){
-                Alert.aler("No data Inside");
-                noStorybookShow(dispatch);
+                Alert.aler("No content Inside");
+                noStoryContent(dispatch);
             } else {
-                 StorybookShow(dispatch, responseJson);
+                StoryContentGet(dispatch, responseJson);
+                saveUser("storyContent_token", JSON.stringify(responseJson));
             }
             
         })
@@ -21,15 +32,15 @@ export const getStoryBook = () => {
 }
 
 
-const noStorybookShow = dispatch => {
+const noStoryContent = dispatch => {
     dispatch({
-        type: NO_STORYBOOK
+        type: NO_STORYCONTENT
     });
 };
 
-const StorybookShow = (dispatch, storybook) => {
+const StoryContentGet = (dispatch, storybook) => {
     dispatch({
-        type: SHOW_STORYBOOK,
+        type: GET_STORYCONTENT,
         payload: storybook
     });
 };

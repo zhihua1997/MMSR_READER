@@ -34,7 +34,11 @@ class LoginForm extends Component {
   loginFunction() {
     const { email, password } = this.props;
 
+    console.log(this.props.password);
+
     this.props.loginUser({ email, password });
+
+   
   }
 
   

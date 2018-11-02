@@ -48,7 +48,7 @@ class menu extends Component {
                             </ListItem>
                         </List>
                         <List>
-                            <ListItem onPress={()=> Actions.drawer2()}>
+                            <ListItem onPress={()=> Actions.introduce()}>
                                 <Text>Menu 2</Text>
                             </ListItem>
                         </List>

@@ -5,3 +5,6 @@ export const LOGIN_USER_SUCCESS = "login_user_success";
 
 export const SHOW_STORYBOOK = "show_storybook";
 export const NO_STORYBOOK = "no_storybook";
+
+export const GET_STORYCONTENT = "get_storycontent";
+export const NO_STORYCONTENT = "no_storycontent";
