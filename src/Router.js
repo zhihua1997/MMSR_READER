@@ -69,7 +69,7 @@ const RouterComponent = ({ initial, props }) => {
 					<Scene
 						key="introduce"
 						component={Introduce}
-						getTitle={ props.title }
+						//getTitle={ props.title }
 					/>
 					<Scene 
 						key="profile"

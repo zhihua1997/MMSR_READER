@@ -76,7 +76,7 @@ class ContentStory extends Component {
                 renderItem={this.renderItem}
                 numColumns={numColumns}
                 ListHeaderComponent={this.renderHeader}
-                onPress={() => Actions.introduce({ title: 'data' })}
+                //onPress={() => Actions.introduce({ title: 'data' })}
             />
             
         );
