@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions, TouchableNativeFeedback } from 'react-native';
+import Top from './Top';
+import { SearchBar } from 'react-native-elements';
+import _ from 'lodash';
+import { Actions } from "react-native-router-flux";
 
 const data = [
     { key: 'A'}, { key: 'B'}, { key: 'C'}, { key: 'D'}, { key: 'E'}, { key: 'F'}, { key: 'G'}, { key: 'H'},
@@ -21,7 +25,38 @@ const formatData = ( data, numColumns) => {
 const numColumns = 3;
 class ContentStory extends Component {
     
-    renderItem = ({ item, index }) => {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            loading: false,
+            stateData: formatData(data, numColumns),
+            error: null,
+            query: "",
+            fullData: formatData(data, numColumns),
+        };
+    }
+    handleSearch = text => {
+        const formatQuery = text.toLowerCase();
+        const stateData = this.state.fullData;
+
+        this.setState({ formatQuery, stateData });
+    }
+
+    renderHeader = () => {
+        return <SearchBar
+        round
+        lightTheme
+        containerStyle={styles.search}
+        //ref="search"
+        //textInputRef="searchText"
+        onChangeText={this.handleSearch}
+        placeholder='Search by Truck Name...'
+    />
+    }
+    
+
+    renderItem = ({ item }) => {
         if (item.empty === true){
             return <View style={[styles.item, styles.itemInvisible]}/>;
         }
@@ -34,12 +69,16 @@ class ContentStory extends Component {
 
     render(){
         return (
+            
             <FlatList
-                data={formatData(data, numColumns)}
+                 data={this.state.stateData}
                 style= {styles.container}
                 renderItem={this.renderItem}
                 numColumns={numColumns}
+                ListHeaderComponent={this.renderHeader}
+                onPress={() => Actions.introduce({ title: 'data' })}
             />
+            
         );
     }
 }

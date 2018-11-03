@@ -6,7 +6,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { Button } from "./tools/button";
+import { Button } from "../tools/button";
 import {
   Container,
   Content,
@@ -21,6 +21,7 @@ import { connect } from 'react-redux';
 import { strings } from '../localization'
 
 class LoginForm extends Component {
+  
 
   onEmailChange(text) {
     this.props.emailChanged(text);

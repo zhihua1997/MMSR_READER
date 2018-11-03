@@ -12,7 +12,7 @@ import {
   Input,  
   Button as ButtonBase
 } from "native-base";
-import { Button, CardSection } from "./tools";
+import { Button, CardSection } from "../tools";
 import { Actions } from "react-native-router-flux";
 //import DialogAndroid from "react-native-dialogs"; // need to uninstall
 //import CheckBox from 'react-native-check-box'; // need to uninstall

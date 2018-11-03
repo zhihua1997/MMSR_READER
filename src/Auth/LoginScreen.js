@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Logo from './Logo';
+import Logo from '../component/Logo';
 import LoginForm from './LoginForm';
-import Wallpaper from './WallPaper';
+import Wallpaper from '../component/WallPaper';
 import { Container, Content } from 'native-base';
 
 export default class LoginScreen extends Component {

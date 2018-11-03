@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View,FlatList } from 'react-native';
-import { Header } from './tools';
-import { Button } from './tools';
+import { Header } from '../tools';
 import {
   Container,
   Content,

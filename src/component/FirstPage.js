@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Actions } from "react-native-router-flux";
 import { Container, Content } from 'native-base';
 import { strings } from '../localization';
-import { Button } from './tools/button';
+import { Button } from '../tools';
 
 class FirstPage extends Component {
 
