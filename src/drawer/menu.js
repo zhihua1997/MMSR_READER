@@ -3,11 +3,13 @@ import { View, Text, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Content, List, ListItem, Thumbnail } from 'native-base';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions/AuthAction';
+import { logoutUser, getStoryBook } from '../actions/AuthAction';
+
 
 
 class menu extends Component {
 
+  
     constructor(props){
         super(props);
         this.state = {
@@ -15,6 +17,11 @@ class menu extends Component {
             loading: false,
         }
     }
+
+    showStorybookFunction() {
+        this.props.getStoryBook();
+    }
+
 
     componentDidMount() {
         AsyncStorage.getItem("id_token").then(token =>{
@@ -36,7 +43,7 @@ class menu extends Component {
                 <View style={{ flex: 2 }}>
                     <Content>
                         <List>
-                            <ListItem onPress={()=> Actions.downloaded()}>
+                            <ListItem onPress={this.showStorybookFunction.bind(this)}>
                                 <Text>Library</Text>
                             </ListItem>
                         </List>
@@ -57,4 +64,4 @@ class menu extends Component {
     }
 }
 
-export default menu;
+export default connect(null, { getStoryBook })(menu);

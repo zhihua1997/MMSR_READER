@@ -76,6 +76,7 @@ class LoginForm extends Component {
   }
 }
 
+
 const styles = {
   imgContainerStyle: {
     alignItems: "center",

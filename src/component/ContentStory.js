@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions, TouchableNativeFeedback } from 'react-native';
+import { Image, StyleSheet, Text, View, FlatList, Dimensions, TouchableNativeFeedback, AsyncStorage } from 'react-native';
 import Top from './Top';
 import { SearchBar } from 'react-native-elements';
 import _ from 'lodash';
 import { Actions } from "react-native-router-flux";
+import { Thumbnail } from 'native-base';
 
-const data = [
+/*const data = [
     { key: 'A'}, { key: 'B'}, { key: 'C'}, { key: 'D'}, { key: 'E'}, { key: 'F'}, { key: 'G'}, { key: 'H'},
     { key: 'I'}, { key: 'J'}
-];
+];*/
 
 const formatData = ( data, numColumns) => {
     const numberOfFullRow = Math.floor( data.length / numColumns);
@@ -23,6 +24,7 @@ const formatData = ( data, numColumns) => {
 };
 
 const numColumns = 3;
+const num = 0
 class ContentStory extends Component {
     
     constructor(props){
@@ -30,12 +32,35 @@ class ContentStory extends Component {
 
         this.state = {
             loading: false,
-            stateData: formatData(data, numColumns),
+            data: [],
+            title:[],
+            /*stateData: formatData(data, numColumns),
             error: null,
             query: "",
-            fullData: formatData(data, numColumns),
+            fullData: formatData(data, numColumns),*/
         };
     }
+
+    componentDidMount() {
+        AsyncStorage.getItem("storybook_token").then(token =>{
+            const Alldata = JSON.parse(token);
+            console.log(Alldata);
+            const len = Alldata.length;
+            var result = [];
+            for (let i=0; i < len; i++) {
+              result = Alldata[i].storybookID;
+              console.log(result);
+              this.state.title.push(result);
+            }
+            this.setState({
+                data: formatData(Alldata, numColumns),
+                loading: token !== null,
+            });
+            console.log(this.state.data);
+        });
+
+    }
+
     handleSearch = text => {
         const formatQuery = text.toLowerCase();
         const stateData = this.state.fullData;
@@ -55,27 +80,39 @@ class ContentStory extends Component {
     />
     }
     
-
     renderItem = ({ item }) => {
+
+        //console.log(item.coverPage);
         if (item.empty === true){
             return <View style={[styles.item, styles.itemInvisible]}/>;
         }
         return (
-            <View style={styles.item}>
-                <Text style={styles.itemText}>{item.key}</Text>
+            
+            <View style={styles.item} >
+                <Image style={{width: 66, height: 58}} 
+                source={{uri:'data:image/png;base64,'+ item.coverPage }}/>
+               <Text style={styles.itemText}>{item.title}</Text>
+               <Text style={styles.itemText}>{item.storybookID}</Text>
             </View>
         );
+
     }
+
+   /* renderTitle() {
+        return this.state.title.map((title, i) => 
+            <Text key={i} style={styles.itemText}>{title}</Text>
+        );
+    }*/
 
     render(){
         return (
             
             <FlatList
-                 data={this.state.stateData}
+                 data={this.state.data}
                 style= {styles.container}
                 renderItem={this.renderItem}
                 numColumns={numColumns}
-                ListHeaderComponent={this.renderHeader}
+                //ListHeaderComponent={this.renderHeader}
                 //onPress={() => Actions.introduce({ title: 'data' })}
             />
             

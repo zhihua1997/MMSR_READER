@@ -1,6 +1,6 @@
 import { Alert, Keyboard, AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
-import { EMAIL_CHANGE, PASSWORD_CHANGE, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS } from './types';
+import { EMAIL_CHANGE, PASSWORD_CHANGE, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, NO_STORYBOOK, SHOW_STORYBOOK } from './types';
 
 export const emailChanged = (text) => {
   return {
@@ -50,6 +50,7 @@ export const loginUser = ({ email, password }) => {
   };
 };
 
+
 const loginUserFail = dispatch => {
   dispatch({
     type: LOGIN_USER_FAIL
@@ -85,3 +86,42 @@ const saveUser = async (item, selectedValue) => {
     console.error("AsyncStorage error: " + error.message);
   }
 };
+
+//StoryBook Action
+
+export const getStoryBook = () => {
+  return dispatch => {
+      fetch("http://tarucmmsr.pe.hu/get_storybook_translate_list.php")
+      .then(response => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+          if (responseJson === null){
+              Alert.aler("No data Inside");
+              noStorybookShow(dispatch);
+          } else {
+               StorybookShow(dispatch, responseJson);
+               saveUser("storybook_token", JSON.stringify(responseJson));
+               Actions.downloaded()
+          }
+          
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+  };
+};
+
+
+const noStorybookShow = dispatch => {
+  dispatch({
+      type: NO_STORYBOOK
+  });
+};
+
+const StorybookShow = (dispatch, storybook) => {
+  dispatch({
+      type: SHOW_STORYBOOK,
+      payload: storybook
+  });
+};
+
