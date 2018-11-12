@@ -111,7 +111,7 @@ class RegisterForm extends Component {
     const { selectedItems } = this.state;
     const { selectedDate } = this.state;
 
-    fetch('http://tarucmmsr.pe.hu/registerReader.php',{
+    fetch('https://mmsrtaruc.000webhostapp.com/ReaderApp/registerReader.php',{
       method: 'POST',
       headers: {
         'Accept': 'application/json',

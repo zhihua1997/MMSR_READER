@@ -65,14 +65,14 @@ class ContentStory extends Component {
 
     }
 
-    getContentFunction() {
-        const { storybookID } = this.props;
-        console.log(this.props.storybookID);
+    getContentFunction(storybookID, languageCode) {
+        //const { storybookID } = this.props;
+        //console.log(this.props.storybookID);
         //storybookID, languageCode = this.props;
 
-        //this.props.getStoryContent({ storybookID, languageCode });
+        this.props.getStoryContent({ storybookID, languageCode });
 
-        //console.log(storybookID, languageCode);
+        console.log(storybookID, languageCode);
     }
     
 
@@ -102,7 +102,7 @@ class ContentStory extends Component {
             return <View style={[styles.item, styles.itemInvisible]}/>;
         }
         return ( 
-        <TouchableOpacity onPress={this.getContentFunction.bind(this)} style={styles.item}>
+        <TouchableOpacity onPress={()=>this.getContentFunction(item.storybookID, item.languageCode)} style={styles.item}>
         <Text value={this.props.storybookID}>{item.storybookID}</Text>
             <View style={styles.item}>
                 <Image style={{width: 66, height: 58}} 
