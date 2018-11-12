@@ -19,7 +19,7 @@ export const passwordChanged = (text) => {
 
 export const loginUser = ({ email, password }) => {
   return dispatch => {
-    fetch("https://mmsrtaruc.000webhostapp.com/ReaderApp/readerLogin.php", {
+    fetch("http://tarucmmsr.pe.hu/readerLogin.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -92,7 +92,7 @@ const saveUser = async (item, selectedValue) => {
 
 export const getStoryBook = () => {
   return dispatch => {
-      fetch("https://mmsrtaruc.000webhostapp.com/get_storybook_translate.php")
+      fetch("http://tarucmmsr.pe.hu/get_storybook_translate_list.php")
       .then(response => response.json())
       .then((responseJson) => {
         console.log(responseJson);
@@ -143,16 +143,16 @@ export const getStoryContent = ({ storybookID, languageCode }) => {
           })
       }
     )
-      .then(response => console.log(response.json()))
+      .then(response => response.json())
       .then((responseJson) => {
         console.log(responseJson);
-          if (responseJson === null){
+          if (responseJson === null) {
               Alert.aler("No content Inside");
               noStoryContent(dispatch);
           } else {
               StoryContentGet(dispatch, responseJson);
               saveUser("storyContent_token", JSON.stringify(responseJson));
-              Actions.introduce()
+              Actions.introduce();
           }
           
       })
