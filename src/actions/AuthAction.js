@@ -19,7 +19,12 @@ export const passwordChanged = (text) => {
 
 export const loginUser = ({ email, password }) => {
   return dispatch => {
+<<<<<<< HEAD
     fetch("http://mmsrtaruc.000webhostapp.com/ReaderApp/readerLogin.php", {
+=======
+    console.log(email, password);
+    fetch("http://tarucmmsr.pe.hu/readerLogin.php", {
+>>>>>>> commit
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -131,18 +136,30 @@ const StorybookShow = (dispatch, storybook) => {
 
 export const getStoryContent = ({ storybookID, languageCode }) => {
   return dispatch => {
+<<<<<<< HEAD
     console.log(storybookID, languageCode);
       fetch(
         "http://mmsrtaruc.000webhostapp.com/ReaderApp/get_storybook_content.php", 
           {
+=======
+      
+      fetch(
+        "http://tarucmmsr.pe.hu/get_storybook_content.php", 
+        {
+>>>>>>> commit
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
+<<<<<<< HEAD
               storybookID: storybookID,
               languageCode: languageCode
+=======
+            storybookID: storybookID,
+            languageCode: languageCode
+>>>>>>> commit
           })
         }
       )
