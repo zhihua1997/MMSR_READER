@@ -129,6 +129,7 @@ class RegisterForm extends Component {
     }).then((response) => response.json())
     .then((responseJson) => {
       Alert.alert(responseJson);
+      Actions.loginScreen();
     }).catch((error) => {
       console.error(error);
     });

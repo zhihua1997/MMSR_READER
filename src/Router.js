@@ -44,7 +44,7 @@ const RouterComponent = ({ initial, props }) => {
 
 				<Scene key="register"
 					component={RegisterForm}
-					hideNavBar={true}
+					
 				/>
 				<Scene key="secondScreen"
 					component={SecondScreen}

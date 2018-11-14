@@ -6,6 +6,8 @@ import LocalizedStrings from 'react-native-localization';
 
 export let strings = new LocalizedStrings({
  en:{
+    default: "EN",
+
    //Title
    loginPage: "Login Page",
 
@@ -24,6 +26,7 @@ export let strings = new LocalizedStrings({
    register: "Register",
  },
  cn:{
+   default: "ZH",
     //Title
     loginPage: "登录页面",
 
@@ -42,6 +45,7 @@ export let strings = new LocalizedStrings({
    register: "注册",
  },
  bm: {
+    default: "BM",
     //Title
     loginPage: "Halaman Log Masuk",
 
@@ -61,6 +65,7 @@ export let strings = new LocalizedStrings({
  },
 
  tm: {
+   default: "TM",
     //Title
     loginPage: "புகுபதிகை பக்கம்",
 

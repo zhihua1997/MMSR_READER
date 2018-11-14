@@ -8,6 +8,7 @@ import { Thumbnail, Container, Content } from 'native-base';
 import { Input } from '../tools';
 import { getStoryContent } from "../actions";
 import { connect } from 'react-redux';
+import { strings } from '../localization'
 
 /*const data = [
     { key: 'A'}, { key: 'B'}, { key: 'C'}, { key: 'D'}, { key: 'E'}, { key: 'F'}, { key: 'G'}, { key: 'H'},
@@ -48,8 +49,9 @@ class ContentStory extends Component {
     componentDidMount() {
         AsyncStorage.getItem("storybook_token").then(token =>{
             const Alldata = JSON.parse(token);
+            //console.log(strings.default);
             console.log(Alldata);
-            const len = Alldata.length;
+            const len = Alldata.length; 
             var result = [];
             for (let i=0; i < len; i++) {
               result = Alldata[i].storybookID;
@@ -96,13 +98,13 @@ class ContentStory extends Component {
     }
     
     renderItem = ({ item }) => {
-
         //console.log(item.coverPage);
+        
         if (item.empty === true){
             return <View style={[styles.item, styles.itemInvisible]}/>;
         }
         return ( 
-        <TouchableOpacity onPress={()=>this.getContentFunction(item.storybookID, item.languageCode)} style={styles.item}>
+        <TouchableOpacity onPress={()=>this.getContentFunction(item.storybookID, strings.default)} style={styles.item}>
         <Text value={this.props.storybookID}>{item.storybookID}</Text>
             <View style={styles.item}>
                 <Image style={{width: 66, height: 58}} 

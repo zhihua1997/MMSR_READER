@@ -131,14 +131,14 @@ const StorybookShow = (dispatch, storybook) => {
 export const getStoryContent = ({ storybookID, languageCode }) => {
   return dispatch => {
     console.log(storybookID, languageCode);
-      fetch("http://tarucmmsr.pe.hu/get_translate_page.php", {
+      fetch("http://tarucmmsr.pe.hu/get_storybook_content.php", {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-              storybookId: storybookID,
+              storybookID: storybookID,
               languageCode: languageCode
           })
       }
