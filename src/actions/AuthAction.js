@@ -19,6 +19,7 @@ export const passwordChanged = (text) => {
 
 export const loginUser = ({ email, password }) => {
   return dispatch => {
+    console.log(email, password);
     fetch("http://tarucmmsr.pe.hu/readerLogin.php", {
       method: "POST",
       headers: {
@@ -130,19 +131,21 @@ const StorybookShow = (dispatch, storybook) => {
 
 export const getStoryContent = ({ storybookID, languageCode }) => {
   return dispatch => {
-    console.log(storybookID, languageCode);
-      fetch("http://tarucmmsr.pe.hu/get_translate_page.php", {
+      
+      fetch(
+        "http://tarucmmsr.pe.hu/get_storybook_content.php", 
+        {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-              storybookId: storybookID,
-              languageCode: languageCode
+            storybookID: storybookID,
+            languageCode: languageCode
           })
-      }
-    )
+        }
+      )
       .then(response => response.json())
       .then((responseJson) => {
         console.log(responseJson);
