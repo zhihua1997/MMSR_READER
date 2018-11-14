@@ -143,8 +143,8 @@ export const getStoryContent = ({ storybookID, languageCode }) => {
               storybookID: storybookID,
               languageCode: languageCode
           })
-      }
-    )
+        }
+      )
       .then(response => response.json())
       .then((responseJson) => {
         console.log(responseJson);
