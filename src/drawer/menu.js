@@ -57,6 +57,11 @@ class menu extends Component {
                                 <Text>Profile</Text>
                             </ListItem>
                         </List>
+                        <List>
+                            <ListItem onPress={()=> Actions.storybook()}>
+                                <Text>Try</Text>
+                            </ListItem>
+                        </List>
                     </Content>
                 </View>
             </View>

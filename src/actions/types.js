@@ -8,3 +8,6 @@ export const NO_STORYBOOK = "no_storybook";
 
 export const GET_STORYCONTENT = "get_storycontent";
 export const NO_STORYCONTENT = "no_storycontent";
+
+export const GET_STORY = "get_story";
+export const NO_STORY = "no_story";

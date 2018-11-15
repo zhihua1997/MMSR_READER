@@ -16,7 +16,7 @@ import Drawer2 from './drawer/drawer2';
 import Profile from './UserProfile/Profile';
 
 import Introduce from './StoryBook/Introduce';
-
+import StoryBook from './StoryBook/StoryBook';
 
 const MenuIcon = () => {
 	return (
@@ -34,6 +34,7 @@ const RouterComponent = ({ initial, props }) => {
 					key="firstPage"
 					component={FirstPage}
 					title="MMSR Reader"
+					hideNavBar={true}
 					navigationBarStyle={{ backgroundColor: '#add8e6', height: 70 }}
 				/>
 
@@ -69,6 +70,11 @@ const RouterComponent = ({ initial, props }) => {
 					<Scene
 						key="introduce"
 						component={Introduce}
+						//getTitle={ props.title }
+					/>
+					<Scene
+						key="storybook"
+						component={StoryBook}
 						//getTitle={ props.title }
 					/>
 					<Scene 
