@@ -141,8 +141,8 @@ export const getStoryContent = ({ storybookID, languageCode }) => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            storybookID: storybookID,
-            languageCode: languageCode
+              storybookID: storybookID,
+              languageCode: languageCode
           })
         }
       )

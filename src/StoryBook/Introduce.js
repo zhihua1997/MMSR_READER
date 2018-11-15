@@ -1,9 +1,49 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions, TextInput } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage } from 'react-native';
 import { Content, List, ListItem, Thumbnail } from 'native-base';
 import { Button } from '../tools';
 
 class Introduce extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            loading: false,
+            author: [],
+            description: [],
+            languageCode: [],
+            age: [],
+        }
+    }
+
+    componentDidMount() {
+        AsyncStorage.getItem("storyContent_token").then(token => {
+            const Alldata = JSON.parse(token);
+            console.log(Alldata);
+            const len = Alldata.length;
+            var authorName = [];
+            var description = [];
+            var languageCode = [];
+            var age = [];
+            for (let i=0; i < len; i++) {
+              languageCode = Alldata[i].languageCode;
+              authorName = Alldata[i].adminId;
+              description = Alldata[i].description;
+              age = Alldata[i].ageGroupCode;
+              this.state.author.push(authorName);
+              this.state.description.push(description);
+              this.state.languageCode.push(languageCode);
+              this.state.age.push(age);
+            }
+            this.setState({
+                data: Alldata,
+                loading: token !== null,
+            });
+            //console.log(this.state.data);
+        });
+
+    }
+
     render() {
         return (
             <View style={styles.viewStyle}>
@@ -11,16 +51,16 @@ class Introduce extends Component {
                     <Thumbnail large source={require('../Images/profile1.jpg')} />
                 </View>
                 <View>
-                    <Text>Author Name</Text>
+                    <Text>{this.state.author}</Text>
                 </View>
                 <View style={styles.viewBox}>
-                <Text>Hello</Text>
+                <Text>{this.state.description}</Text>
                 </View>
                 <View style={styles.viewBox}>
-                <Text>Language</Text>
+                <Text>{this.state.languageCode}</Text>
                 </View>
                 <View style={styles.viewBox}>
-                <Text>Age</Text>
+                <Text>{this.state.age}</Text>
                 </View>
                 <Button>
                     Read
