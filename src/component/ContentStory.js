@@ -44,7 +44,6 @@ class ContentStory extends Component {
         };
     }
 
-    
 
     componentDidMount() {
         AsyncStorage.getItem("storybook_token").then(token =>{

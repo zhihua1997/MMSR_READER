@@ -1,44 +1,85 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage, AppRegistry, Image, Button, Animated } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage, AppRegistry, Image, Button, Animated, Alert } from 'react-native';
 import { Content, List, ListItem, Thumbnail } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 class StoryBook extends Component {
-    state = {
-        badgeScale: new Animated.Value(0),
-        textValue: 0,
+    constructor(props){
+        super(props);
+
+        this.state = {
+            loading: false,
+            data: [],
+            pageNo: [],
+            media: [],
+            content: [],
+            count: 0,
+        }
     }
 
-    animateBadge(){
-        this.state.badgeScale.setValue(0)
-        const newTextValue = ++this.state.textValue
-        this.setState({textValue: newTextValue })
-        Animated.timing(this.state.badgeScale, {
-            toValue: 1,
-            duration: 500
-        }).start()
+    componentDidMount() {
+        AsyncStorage.getItem("story_token").then(token => {
+            const Alldata = JSON.parse(token);
+            console.log(Alldata);
+            const len = Alldata.length;
+            var pageNo = [];
+            var media = [];
+            var content = [];
+           
+            for (let i=0; i < len; i++) {
+              pageNo = Alldata[i].pageNo;
+              media = Alldata[i].media;
+              content = Alldata[i].content;
+             
+              this.state.pageNo.push(pageNo);
+              this.state.media.push(media);
+              this.state.content.push(content);
+              
+            }
+            this.setState({
+                data: Alldata,
+                loading: token !== null,
+            });
+            //console.log(this.state.data);
+        });
+
+    }
+
+    IncrementCount = () => {
+        const len = this.state.pageNo.length - 1;
+        if (this.state.count < len) {
+        this.setState({ count: this.state.count + 1 });
+        }
+        else {
+            Alert.alert("This is the last Page");
+        }
+    }
+
+    DecreaseCount = () => {
+        if (this.state.count > 0) {
+        this.setState({ count: this.state.count - 1 });
+        }
+        else 
+        {
+            Alert.alert("This is the first page");
+        }
     }
     
     render() {
 
         return(
             <View style={styles.container}>
-                <View style={{width: 100, height: 100, backgroundColor:'red', borderRadius: 50}}>
-                <Image style={{width: 100, height: 100, backgroundColor:'red', borderRadius: 50}}
-                source={require('../Images/flower.png')}></Image>
-                    <Animated.View style = {{position: 'absolute', width: 40, height: 40, backgroundColor:'black', borderRadius: 25,
-                    justifyContent: 'center', alignItems: 'center',
-                    borderColor: 'green',borderWidth: 1,
-                    left: 0, top: 0,
-                    tranform:[
-                        {
-                            scale: this.state.badgeScale
-                        }
-                    ]
-                    }}>
-                      <Text style={{backgroundColor:"transparent",color:'white',}}> {this.state.textValue}</Text>
-                    </Animated.View>
+            <View>
+                <Image style={{width: 100, height: 100}} 
+                source={{uri:'data:image/png;base64,'+ this.state.media[this.state.count] }}/>
+            </View>
+            <Text>{this.state.content[this.state.count]}</Text>
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Icon name="chevron-left" size={30} color="#000" style={{ marginRight: 10 }} onPress={ this.DecreaseCount} />
+                   <Text>{this.state.pageNo[this.state.count]}</Text>
+                 <Icon name="chevron-right" size={30} color="#000" style={{ marginRight: 10 }} onPress={ this.IncrementCount}/>
                 </View>
-                <Button title='Add' onPress={() => this.animateBadge()}></Button>
             </View>
         )
     }
@@ -51,6 +92,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
+    },
+    item: {
+        backgroundColor: '#4D243D',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        margin: 1,
+    },
+    itemText: {
+        color: '#FFF',
+    },
+    itemInvisible: {
+        backgroundColor: 'transparent',
     }
 })
 
