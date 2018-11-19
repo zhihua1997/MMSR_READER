@@ -19,8 +19,12 @@ export const passwordChanged = (text) => {
 
 export const loginUser = ({ email, password }) => {
   return dispatch => {
+<<<<<<< HEAD
     console.log(email, password);
     fetch("http://tarucmmsr.pe.hu/readerLogin.php", {
+=======
+    fetch("http://mmsrtaruc.000webhostapp.com/ReaderApp/readerLogin.php", {
+>>>>>>> 89f0e52562b55d7c1bd62215175dd9911a5d9012
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -93,7 +97,7 @@ const saveUser = async (item, selectedValue) => {
 
 export const getStoryBook = () => {
   return dispatch => {
-      fetch("http://tarucmmsr.pe.hu/get_storybook_translate_list.php")
+      fetch("http://mmsrtaruc.000webhostapp.com/get_storybook_translate_list.php")
       .then(response => response.json())
       .then((responseJson) => {
         console.log(responseJson);
@@ -131,10 +135,17 @@ const StorybookShow = (dispatch, storybook) => {
 
 export const getStoryContent = ({ storybookID, languageCode }) => {
   return dispatch => {
+<<<<<<< HEAD
       
       fetch(
         "http://tarucmmsr.pe.hu/get_storybook_content.php", 
         {
+=======
+    console.log(storybookID, languageCode);
+      fetch(
+        "http://mmsrtaruc.000webhostapp.com/ReaderApp/get_storybook_content.php", 
+          {
+>>>>>>> 89f0e52562b55d7c1bd62215175dd9911a5d9012
           method: "POST",
           headers: {
             Accept: "application/json",
