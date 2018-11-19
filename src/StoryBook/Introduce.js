@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage } from 'react-native';
 import { Content, List, ListItem, Thumbnail } from 'native-base';
 import { Button } from '../tools';
+import { connect } from 'react-redux';
+import { getStory } from '../actions'
 
 class Introduce extends Component {
     constructor(props){
@@ -9,6 +11,7 @@ class Introduce extends Component {
 
         this.state = {
             loading: false,
+            storybookID: [],
             author: [],
             description: [],
             languageCode: [],
@@ -24,12 +27,15 @@ class Introduce extends Component {
             var authorName = [];
             var description = [];
             var languageCode = [];
+            var storybookID = [];
             var age = [];
             for (let i=0; i < len; i++) {
               languageCode = Alldata[i].languageCode;
               authorName = Alldata[i].adminId;
               description = Alldata[i].description;
               age = Alldata[i].ageGroupCode;
+              storybookID = Alldata[i].storybookID;
+              this.state.storybookID.push(storybookID);
               this.state.author.push(authorName);
               this.state.description.push(description);
               this.state.languageCode.push(languageCode);
@@ -42,6 +48,16 @@ class Introduce extends Component {
             //console.log(this.state.data);
         });
 
+    }
+
+    getStoryFunction(storybookID, languageCode) {
+        //const { storybookID } = this.props;
+        //console.log(this.props.storybookID);
+        //storybookID, languageCode = this.props;
+
+        this.props.getStory({ storybookID, languageCode });
+
+        console.log(storybookID, languageCode);
     }
 
     render() {
@@ -62,7 +78,7 @@ class Introduce extends Component {
                 <View style={styles.viewBox}>
                 <Text>{this.state.age}</Text>
                 </View>
-                <Button>
+                <Button onPress={()=> this.getStoryFunction(this.state.storybookID[0], this.state.languageCode[0])}>
                     Read
                 </Button>
             </View>
@@ -91,4 +107,4 @@ const styles = {
     }
 }
 
-export default Introduce;
+export default connect(null, { getStory })(Introduce);

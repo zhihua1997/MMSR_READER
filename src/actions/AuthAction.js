@@ -1,7 +1,7 @@
 import { Alert, Keyboard, AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { EMAIL_CHANGE, PASSWORD_CHANGE, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, NO_STORYBOOK, SHOW_STORYBOOK,
-  GET_STORYCONTENT, NO_STORYCONTENT } from './types';
+  GET_STORYCONTENT, NO_STORYCONTENT, NO_STORY, GET_STORY } from './types';
 
 export const emailChanged = (text) => {
   return {
@@ -19,12 +19,7 @@ export const passwordChanged = (text) => {
 
 export const loginUser = ({ email, password }) => {
   return dispatch => {
-<<<<<<< HEAD
-    console.log(email, password);
-    fetch("http://tarucmmsr.pe.hu/readerLogin.php", {
-=======
     fetch("http://mmsrtaruc.000webhostapp.com/ReaderApp/readerLogin.php", {
->>>>>>> 89f0e52562b55d7c1bd62215175dd9911a5d9012
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -95,6 +90,7 @@ const saveUser = async (item, selectedValue) => {
 
 //StoryBook Action
 
+
 export const getStoryBook = () => {
   return dispatch => {
       fetch("http://mmsrtaruc.000webhostapp.com/get_storybook_translate_list.php")
@@ -135,17 +131,10 @@ const StorybookShow = (dispatch, storybook) => {
 
 export const getStoryContent = ({ storybookID, languageCode }) => {
   return dispatch => {
-<<<<<<< HEAD
-      
-      fetch(
-        "http://tarucmmsr.pe.hu/get_storybook_content.php", 
-        {
-=======
     console.log(storybookID, languageCode);
       fetch(
         "http://mmsrtaruc.000webhostapp.com/ReaderApp/get_storybook_content.php", 
           {
->>>>>>> 89f0e52562b55d7c1bd62215175dd9911a5d9012
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -186,6 +175,56 @@ const noStoryContent = dispatch => {
 const StoryContentGet = (dispatch, storybook) => {
   dispatch({
       type: GET_STORYCONTENT,
+      payload: storybook
+  });
+};
+
+export const getStory = ({ storybookID, languageCode }) => {
+  return dispatch => {
+    console.log(storybookID, languageCode);
+      fetch(
+        "http://mmsrtaruc.000webhostapp.com/ReaderApp/get_content.php", 
+          {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              storybookID: storybookID,
+              languageCode: languageCode
+          })
+        }
+      )
+      .then(response => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+          if (responseJson === null) {
+              Alert.aler("No content Inside");
+              noStory(dispatch);
+          } else {
+              StoryGet(dispatch, responseJson);
+              saveUser("story_token", JSON.stringify(responseJson));
+              Actions.storybook();
+          }
+          
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+  }
+}
+
+
+const noStory = dispatch => {
+  dispatch({
+      type: NO_STORY
+  });
+};
+
+const StoryGet = (dispatch, storybook) => {
+  dispatch({
+      type: GET_STORY,
       payload: storybook
   });
 };
