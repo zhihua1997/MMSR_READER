@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage, AppRegistry, Image, Button, Animated, Alert } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage, AppRegistry, Image, Animated, Alert } from 'react-native';
 import { Content, List, ListItem, Thumbnail } from 'native-base';
+import { Button } from '../tools';
 import Icon from 'react-native-vector-icons/FontAwesome';
+//import Speech from 'react-native-speech';
+//import Tts from 'react-native-tts';
 
 
 class StoryBook extends Component {
@@ -65,7 +68,8 @@ class StoryBook extends Component {
             Alert.alert("This is the first page");
         }
     }
-    
+ 
+
     render() {
 
         return(
@@ -80,9 +84,11 @@ class StoryBook extends Component {
                    <Text>{this.state.pageNo[this.state.count]}</Text>
                  <Icon name="chevron-right" size={30} color="#000" style={{ marginRight: 10 }} onPress={ this.IncrementCount}/>
                 </View>
+           
             </View>
         )
     }
+
      
 }
 

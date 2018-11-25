@@ -17,6 +17,7 @@ import Profile from './UserProfile/Profile';
 
 import Introduce from './StoryBook/Introduce';
 import StoryBook from './StoryBook/StoryBook';
+import Feedback from './StoryBook/Feedback';
 
 const MenuIcon = () => {
 	return (
@@ -75,6 +76,11 @@ const RouterComponent = ({ initial, props }) => {
 					<Scene
 						key="storybook"
 						component={StoryBook}
+						//getTitle={ props.title }
+					/>
+					<Scene
+						key="feedback"
+						component={Feedback}
 						//getTitle={ props.title }
 					/>
 					<Scene 
