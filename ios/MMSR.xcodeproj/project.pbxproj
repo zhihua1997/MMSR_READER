@@ -14,7 +14,6 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* MMSRTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MMSRTests.m */; };
 		08FC8216CE0D414392AB7770 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 123439968F7F4C02BF7A02C1 /* MaterialIcons.ttf */; };
-		0932B3EF738F44CCA48528E4 /* libSpeechSynthesizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3411F7C3BB14402F8982B448 /* libSpeechSynthesizer.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -26,10 +25,9 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		15B18B63AD704E5EB8638A58 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB4D0C02DE284D2A930CA9BD /* Feather.ttf */; };
 		1711A7D32199602400215CAF /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1711A7AA2199602400215CAF /* libsqlite3.0.tbd */; };
-		171CCB6921AE3F7900269DFE /* libVoice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 171CCB6821AE3F5000269DFE /* libVoice.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		171CCC2321AE72F200269DFE /* www in Resources */ = {isa = PBXBuildFile; fileRef = 171CCC2221AE72F200269DFE /* www */; };
 		17D39E632180407400DC7C91 /* react-native-localization in Resources */ = {isa = PBXBuildFile; fileRef = 17D39E622180407400DC7C91 /* react-native-localization */; };
 		231E8C5D3892425AB0671D5F /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A60A75B218E419599A4AE41 /* rubicon-icon-font.ttf */; };
-		248C50073216480DBEFE6C1B /* libTextToSpeech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C12CDECFC9A04E49B2FF7715 /* libTextToSpeech.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -142,13 +140,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
-		};
-		171CCB6721AE3F5000269DFE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 171CCB6321AE3F5000269DFE /* Voice.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DC0729B51EF78E41004EBC83;
-			remoteInfo = Voice;
 		};
 		17D39E6021803F6E00DC7C91 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -395,7 +386,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		147713BC8B9346A6AB8DE684 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		1711A7AA2199602400215CAF /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		171CCB6321AE3F5000269DFE /* Voice.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Voice.xcodeproj; path = "../node_modules/react-native-voice/ios/Voice.xcodeproj"; sourceTree = "<group>"; };
+		171CCC2221AE72F200269DFE /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = MMSR/www; sourceTree = "<group>"; };
 		17D39E622180407400DC7C91 /* react-native-localization */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-localization"; path = "../node_modules/react-native-localization"; sourceTree = "<group>"; };
 		22B9CA6B01164E47A31EE4BC /* SQLite.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* MMSR-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MMSR-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -451,7 +442,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				171CCB6921AE3F7900269DFE /* libVoice.a in Frameworks */,
 				1711A7D32199602400215CAF /* libsqlite3.0.tbd in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -469,8 +459,6 @@
 				E167FFA96B6D4589B3D7E834 /* libReactNativeLocalization.a in Frameworks */,
 				F7D3B70A9DDC4F1E9AE975AC /* libRNVectorIcons.a in Frameworks */,
 				442BA0C8CA874103977A2A0A /* libSQLite.a in Frameworks */,
-				0932B3EF738F44CCA48528E4 /* libSpeechSynthesizer.a in Frameworks */,
-				248C50073216480DBEFE6C1B /* libTextToSpeech.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +570,7 @@
 		13B07FAE1A68108700A75B9A /* MMSR */ = {
 			isa = PBXGroup;
 			children = (
+				171CCC2221AE72F200269DFE /* www */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -628,14 +617,6 @@
 			isa = PBXGroup;
 			children = (
 				1711A78521995C2600215CAF /* libRNVectorIcons.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		171CCB6421AE3F5000269DFE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				171CCB6821AE3F5000269DFE /* libVoice.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -707,7 +688,6 @@
 				7D8A00CDE6CE4B728588338F /* ReactNativeLocalization.xcodeproj */,
 				8CBE16CB26384728ADA66BA8 /* RNVectorIcons.xcodeproj */,
 				22B9CA6B01164E47A31EE4BC /* SQLite.xcodeproj */,
-				171CCB6321AE3F5000269DFE /* Voice.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -966,10 +946,6 @@
 					ProductGroup = 1711A77C21995C2600215CAF /* Products */;
 					ProjectRef = 22B9CA6B01164E47A31EE4BC /* SQLite.xcodeproj */;
 				},
-				{
-					ProductGroup = 171CCB6421AE3F5000269DFE /* Products */;
-					ProjectRef = 171CCB6321AE3F5000269DFE /* Voice.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1050,13 +1026,6 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = 1711A78421995C2600215CAF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		171CCB6821AE3F5000269DFE /* libVoice.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libVoice.a;
-			remoteRef = 171CCB6721AE3F5000269DFE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		17D39E6121803F6E00DC7C91 /* libReactNativeLocalization.a */ = {
@@ -1298,6 +1267,7 @@
 				C5B29342D3834DF6A564D015 /* SimpleLineIcons.ttf in Resources */,
 				A7BAF1939C75487D8552A6AC /* Entypo.ttf in Resources */,
 				552F04CFDE344F19BA2268A0 /* FontAwesome.ttf in Resources */,
+				171CCC2321AE72F200269DFE /* www in Resources */,
 				A0F6433A922A4C45993E593F /* Foundation.ttf in Resources */,
 				85D4F0964C2849A7B63E2335 /* Ionicons.ttf in Resources */,
 				36802B10D0394F32AF879046 /* MaterialCommunityIcons.ttf in Resources */,

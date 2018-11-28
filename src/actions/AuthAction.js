@@ -1,7 +1,7 @@
 import { Alert, Keyboard, AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { EMAIL_CHANGE, PASSWORD_CHANGE, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, NO_STORYBOOK, SHOW_STORYBOOK,
-  GET_STORYCONTENT, NO_STORYCONTENT, NO_STORY, GET_STORY } from './types';
+  GET_STORYCONTENT, NO_STORYCONTENT, NO_STORY, GET_STORY, FEEDBACK_FAIL, FEEDBACK_SUCCESS } from './types';
 
 export const emailChanged = (text) => {
   return {
@@ -226,5 +226,55 @@ const StoryGet = (dispatch, storybook) => {
   dispatch({
       type: GET_STORY,
       payload: storybook
+  });
+};
+
+export const starFeedback = ({ userID, storybookID, rateValue }) => {
+  return dispatch => {
+    console.log(userID, storybookID, rateValue);
+      fetch(
+        "http://mmsrtaruc.000webhostapp.com/ReaderApp/feedback.php", 
+          {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              userID: userID,
+              storybookID: storybookID,
+              rateValue: rateValue
+          })
+        }
+      )
+      .then(response => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+          if (responseJson === "Try Again") {
+              Alert.aler("Feedback Fail");
+              failFeedback(dispatch);
+          } else {
+              successFeedback(dispatch, responseJson);
+              Actions.storybook();
+          }
+          
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+  }
+}
+
+
+const failFeedback = dispatch => {
+  dispatch({
+      type: FEEDBACK_FAIL
+  });
+};
+
+const successFeedback = (dispatch, rate) => {
+  dispatch({
+      type: FEEDBACK_SUCCESS,
+      payload: rate
   });
 };

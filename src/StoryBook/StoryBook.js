@@ -14,6 +14,7 @@ class StoryBook extends Component {
 
         this.state = {
             loading: false,
+            storybookID: [],
             data: [],
             pageNo: [],
             media: [],
@@ -29,15 +30,18 @@ class StoryBook extends Component {
             const Alldata = JSON.parse(token);
             console.log(Alldata);
             const len = Alldata.length;
+            var storybookID = [];
             var pageNo = [];
             var media = [];
             var content = [];
 
             for (let i = 0; i < len; i++) {
+                storybookID = Alldata[i].storybookID;
                 pageNo = Alldata[i].pageNo;
                 media = Alldata[i].media;
                 content = Alldata[i].content;
 
+                this.state.storybookID.push(storybookID);
                 this.state.pageNo.push(pageNo);
                 this.state.media.push(media);
                 this.state.content.push(content);
@@ -98,7 +102,7 @@ class StoryBook extends Component {
                     <Text>{this.state.content[this.state.count]}</Text>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Icon name="chevron-left" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.DecreaseCount} />
-                        <Text>{this.state.pageNo[this.state.count]}</Text>
+                        <Text>{this.state.pageNo[this.state.count]}/{this.state.pageNo.length}</Text>
                         <Icon name="chevron-right" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.IncrementCount} />
                     </View>
                 <Modal visible={this.state.showMe} onRequestClose={() => console.warn("this is a close request")} >
