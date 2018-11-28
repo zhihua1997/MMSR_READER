@@ -91,17 +91,6 @@ class StoryBook extends Component {
     render() {
         return (
             <View style={styles.container}>
-<<<<<<< HEAD
-            <View>
-                <Image style={{width: 100, height: 100}} 
-                source={{uri:'data:image/png;base64,'+ this.state.media[this.state.count] }}/>
-            </View>
-            <Text>{this.state.content[this.state.count]}</Text>
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Icon name="chevron-left" size={30} color="#000" style={{ marginRight: 10 }} onPress={ this.DecreaseCount} />
-                   <Text>{this.state.pageNo[this.state.count]}/{this.state.pageNo.length}</Text>
-                 <Icon name="chevron-right" size={30} color="#000" style={{ marginRight: 10 }} onPress={ this.IncrementCount}/>
-=======
                     <View>
                         <Image style={{ width: 100, height: 100 }}
                             source={{ uri: 'data:image/png;base64,' + this.state.media[this.state.count] }} />
@@ -121,7 +110,6 @@ class StoryBook extends Component {
                         selectedStar={(rating) => this.onStarRatingPress(rating)}
                     />
                     <Button style={styles.feedbackBtn} onPress={this.closeFeedback}>Okay</Button>
->>>>>>> c45c249918feb6b13f7bee021160754afe0426f4
                 </View>
                 </Modal>
             </View>
