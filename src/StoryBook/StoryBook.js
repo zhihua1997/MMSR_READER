@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage, AppRegistry, Image, Button, Animated, Alert } from 'react-native';
 import { Content, List, ListItem, Thumbnail } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+=======
+import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage, AppRegistry, Image, Animated, Alert } from 'react-native';
+import { Content, List, ListItem, Thumbnail } from 'native-base';
+import { Button } from '../tools';
+import Icon from 'react-native-vector-icons/FontAwesome';
+//import Speech from 'react-native-speech';
+//import Tts from 'react-native-tts';
+>>>>>>> 5fa3da11f3636c86973233f56f8caced8e525e84
 
 
 class StoryBook extends Component {
@@ -44,6 +53,7 @@ class StoryBook extends Component {
             //console.log(this.state.data);
         });
 
+<<<<<<< HEAD
     }
 
     IncrementCount = () => {
@@ -56,6 +66,20 @@ class StoryBook extends Component {
         }
     }
 
+=======
+    }
+
+    IncrementCount = () => {
+        const len = this.state.pageNo.length - 1;
+        if (this.state.count < len) {
+        this.setState({ count: this.state.count + 1 });
+        }
+        else {
+            Alert.alert("This is the last Page");
+        }
+    }
+
+>>>>>>> 5fa3da11f3636c86973233f56f8caced8e525e84
     DecreaseCount = () => {
         if (this.state.count > 0) {
         this.setState({ count: this.state.count - 1 });
@@ -65,7 +89,8 @@ class StoryBook extends Component {
             Alert.alert("This is the first page");
         }
     }
-    
+ 
+
     render() {
 
         return(
@@ -80,9 +105,14 @@ class StoryBook extends Component {
                    <Text>{this.state.pageNo[this.state.count]}</Text>
                  <Icon name="chevron-right" size={30} color="#000" style={{ marginRight: 10 }} onPress={ this.IncrementCount}/>
                 </View>
+<<<<<<< HEAD
+=======
+           
+>>>>>>> 5fa3da11f3636c86973233f56f8caced8e525e84
             </View>
         )
     }
+
      
 }
 
