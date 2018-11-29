@@ -14,3 +14,5 @@ export const NO_STORY = "no_story";
 
 export const FEEDBACK_SUCCESS = "feedback_success";
 export const FEEDBACK_FAIL = "feedback_fail";
+
+export const DOWNLOAD_SUCCESS = "download_success";

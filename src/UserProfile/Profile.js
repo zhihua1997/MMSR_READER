@@ -33,6 +33,7 @@ componentDidMount() {
         <ScrollView>
           <Text>Profile</Text>
           <Text>{this.state.name}</Text>
+          <Text>{this.props.user.userId}</Text>
           <Button onPress={this.signoutUser.bind(this)}>SignOut</Button>
         </ScrollView>
       </View>
@@ -46,4 +47,12 @@ const styles = {
   },
 };
 
-export default connect(null, { logoutUser })(Profile);
+const mapStateToProps = state => {
+  const { user } = state.auth;
+
+  return { user };
+};
+
+export default connect(
+  mapStateToProps, 
+  { logoutUser })(Profile);

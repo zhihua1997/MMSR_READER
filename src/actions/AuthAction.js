@@ -32,6 +32,7 @@ export const loginUser = ({ email, password }) => {
     })
       .then(response => response.json())
       .then(responseJson => {
+        //console.log(responseJson);
         if (responseJson === "Invalid Username or Password Please Try Again") {
           Alert.alert("Invalid email or Password");
           loginUserFail(dispatch);
