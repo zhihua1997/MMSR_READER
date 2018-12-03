@@ -26,8 +26,9 @@ class StoryBook extends Component {
             count: 0,
             starCount: 0,
             showMe: false,
-            speechRate: 0.5,
+            speechRate: 0.3,
             speechPitch: 1,
+            refresh: false,
         }
     }
 
@@ -37,42 +38,47 @@ class StoryBook extends Component {
         this.getS();
     }
 
+
     onStarRatingPress(rating) {
         this.setState({
             starCount: rating
         });
     }
 
+    data(){
+        AsyncStorage.getItem("story_token").then(token => {
+            const Alldata = JSON.parse(token);
+            console.log(Alldata);
+            const len = Alldata.length;
+            var storybookID = [];
+            var pageNo = [];
+            var media = [];
+            var content = [];
+
+            for (let i = 0; i < len; i++) {
+                storybookID = Alldata[i].storybookID;
+                pageNo = Alldata[i].pageNo;
+                media = Alldata[i].media;
+                content = Alldata[i].content;
+
+                this.state.storybookID.push(storybookID);
+                this.state.pageNo.push(pageNo);
+                this.state.media.push(media);
+                this.state.content.push(content);
+
+            }
+            this.setState({
+                data: Alldata,
+                loading: token !== null,
+
+            });
+            console.log(this.state.data);
+        });
+    }
+
     getS = async () => {
         try {
-            await  AsyncStorage.getItem("story_token").then(token => {
-                const Alldata = JSON.parse(token);
-                console.log(Alldata);
-                const len = Alldata.length;
-                var storybookID = [];
-                var pageNo = [];
-                var media = [];
-                var content = [];
-    
-                for (let i = 0; i < len; i++) {
-                    storybookID = Alldata[i].storybookID;
-                    pageNo = Alldata[i].pageNo;
-                    media = Alldata[i].media;
-                    content = Alldata[i].content;
-    
-                    this.state.storybookID.push(storybookID);
-                    this.state.pageNo.push(pageNo);
-                    this.state.media.push(media);
-                    this.state.content.push(content);
-    
-                }
-                this.setState({
-                    data: Alldata,
-                    loading: token !== null,
-    
-                });
-                console.log(this.state.data);
-            });
+            await this.data();
           } catch (error) {
             console.error("AsyncStorage error: " + error.message);
           }

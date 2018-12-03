@@ -206,7 +206,7 @@ export const getStory = ({ storybookID, languageCode }) => {
             
               StoryGet(dispatch, responseJson);
               saveUser("story_token", JSON.stringify(responseJson));
-              Actions.storybook({ key: "start"});
+              Actions.storybook();
           }
           
       })
