@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { translateStory } from '../actions'
 //import Speech from 'react-native-speech';
 //import Tts from 'react-native-tts';
-import Tts from "react-native-tts";
+//import Tts from "react-native-tts";
 
 const items = ["Select Language","EN", "BM", "ZH"];
 
@@ -135,13 +135,13 @@ class StoryBook extends Component {
         this.componentDidMount();
     }
 
-    readText(item){
+    /*readText(item){
         Tts.stop();
         Tts.speak(item, { iosVoiceId: 'com.apple.ttsbundle.Moira-compact' });
-      //  Tts.speak(item, { androidParams: { KEY_PARAM_PAN: -1, KEY_PARAM_VOLUME: 0.5, KEY_PARAM_STREAM: 'STREAM_MUSIC' } });
+        Tts.speak(item, { androidParams: { KEY_PARAM_PAN: -1, KEY_PARAM_VOLUME: 0.5, KEY_PARAM_STREAM: 'STREAM_MUSIC' } });
          Tts.setDefaultRate(this.state.speechRate);
          Tts.setDefaultPitch(this.state.speechPitch);
-      };
+      };*/
 
     
     render() {
@@ -166,10 +166,8 @@ class StoryBook extends Component {
                     <Icon name="chevron-left" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.DecreaseCount} />
                     <Text>{this.state.pageNo[this.state.count]}/{this.state.pageNo.length}</Text>
                     <Icon name="chevron-right" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.IncrementCount} />
-                </View>
-                <Button onPress={()=> this.readText(this.state.content[this.state.count])} style={{ width: 50, height: 20 }} >
-                    Speak
-                </Button>
+        </View>
+                
                 <Modal visible={this.state.showMe} onRequestClose={() => console.warn("this is a close request")} >
                     <View style={styles.container}>
                         <StarRating

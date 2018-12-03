@@ -32,7 +32,6 @@
     "react-native-speech": "^0.1.2",
     "react-native-sqlite-storage": "^3.3.8",
     "react-native-star-rating": "^1.1.0",
-    "react-native-tts": "^2.0.0",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^2.18.2",
     "react-popout": "^1.0.1",

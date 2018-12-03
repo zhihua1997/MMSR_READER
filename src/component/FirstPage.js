@@ -15,19 +15,19 @@ class FirstPage extends Component {
             isLoad: false
           };
 
-      /*  db.transaction(tx => {
+       db.transaction(tx => {
             tx.executeSql(
-              "SELECT * FROM language WHERE languageCode=?",
-              ["EN"],
+              "SELECT * FROM ageGroup WHERE ageGroupDesc=?",
+              ["Hi"],
               (tx, results) => {
                 var len = results.rows.length;
                 if (len > 0) {
                   var row = results.rows.item(0);
-                  this.setState({ lan: row.languageDesc });
+                  this.setState({ lan: row.ageGroupCode });
                 }
               }
             );
-          });*/
+          });
     }
 
     overLangEN = () => {

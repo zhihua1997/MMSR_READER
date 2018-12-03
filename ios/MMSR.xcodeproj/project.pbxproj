@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -24,7 +25,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		15B18B63AD704E5EB8638A58 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB4D0C02DE284D2A930CA9BD /* Feather.ttf */; };
 		1711A7D32199602400215CAF /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1711A7AA2199602400215CAF /* libsqlite3.0.tbd */; };
-		171CCC2321AE72F200269DFE /* www in Resources */ = {isa = PBXBuildFile; fileRef = 171CCC2221AE72F200269DFE /* www */; };
+		17C1BFA821B5275700DCEDD8 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 17C1BFA721B5275700DCEDD8 /* www */; };
 		17D39E632180407400DC7C91 /* react-native-localization in Resources */ = {isa = PBXBuildFile; fileRef = 17D39E622180407400DC7C91 /* react-native-localization */; };
 		231E8C5D3892425AB0671D5F /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A60A75B218E419599A4AE41 /* rubicon-icon-font.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -139,6 +140,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
+		};
+		17C1BF2E21B516B700DCEDD8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E407D645A9142B5BC133987 /* SpeechSynthesizer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = SpeechSynthesizer;
 		};
 		17D39E6021803F6E00DC7C91 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -385,7 +393,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		147713BC8B9346A6AB8DE684 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		1711A7AA2199602400215CAF /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		171CCC2221AE72F200269DFE /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = MMSR/www; sourceTree = "<group>"; };
+		17C1BFA721B5275700DCEDD8 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = MMSR/www; sourceTree = "<group>"; };
 		17D39E622180407400DC7C91 /* react-native-localization */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-localization"; path = "../node_modules/react-native-localization"; sourceTree = "<group>"; };
 		22B9CA6B01164E47A31EE4BC /* SQLite.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* MMSR-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MMSR-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -400,6 +408,7 @@
 		61CAC27F98884A949BEC3A9E /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		638E91FE0F4041C0BD1A959B /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		65E4B89D4F9A40C78C577F14 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		6E407D645A9142B5BC133987 /* SpeechSynthesizer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SpeechSynthesizer.xcodeproj; path = "../node_modules/react-native-speech/SpeechSynthesizer.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7C9B2F9DE40B48EDB619FAA9 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		7D8A00CDE6CE4B728588338F /* ReactNativeLocalization.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeLocalization.xcodeproj; path = "../node_modules/react-native-localization/ReactNativeLocalization.xcodeproj"; sourceTree = "<group>"; };
@@ -426,8 +435,6 @@
 		F2BD8F6ACA5342C28FC665FF /* libSQLite.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSQLite.a; sourceTree = "<group>"; };
 		F35FFB3760DB4C5BB288E160 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		F95ABAC688264802BC20AA78 /* libVoice.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libVoice.a; sourceTree = "<group>"; };
-		6E407D645A9142B5BC133987 /* SpeechSynthesizer.xcodeproj */ = {isa = PBXFileReference; name = "SpeechSynthesizer.xcodeproj"; path = "../node_modules/react-native-speech/SpeechSynthesizer.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		6BC2361B356E42E18E961BED /* TextToSpeech.xcodeproj */ = {isa = PBXFileReference; name = "TextToSpeech.xcodeproj"; path = "../node_modules/react-native-tts/ios/TextToSpeech.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -571,7 +578,7 @@
 		13B07FAE1A68108700A75B9A /* MMSR */ = {
 			isa = PBXGroup;
 			children = (
-				171CCC2221AE72F200269DFE /* www */,
+				17C1BFA721B5275700DCEDD8 /* www */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -635,6 +642,14 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		17C1BF0421B516B700DCEDD8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17C1BF2F21B516B700DCEDD8 /* libSpeechSynthesizer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		17D39E5D21803F6C00DC7C91 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -690,7 +705,6 @@
 				8CBE16CB26384728ADA66BA8 /* RNVectorIcons.xcodeproj */,
 				22B9CA6B01164E47A31EE4BC /* SQLite.xcodeproj */,
 				6E407D645A9142B5BC133987 /* SpeechSynthesizer.xcodeproj */,
-				6BC2361B356E42E18E961BED /* TextToSpeech.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -946,6 +960,10 @@
 					ProjectRef = 8CBE16CB26384728ADA66BA8 /* RNVectorIcons.xcodeproj */;
 				},
 				{
+					ProductGroup = 17C1BF0421B516B700DCEDD8 /* Products */;
+					ProjectRef = 6E407D645A9142B5BC133987 /* SpeechSynthesizer.xcodeproj */;
+				},
+				{
 					ProductGroup = 1711A77C21995C2600215CAF /* Products */;
 					ProjectRef = 22B9CA6B01164E47A31EE4BC /* SQLite.xcodeproj */;
 				},
@@ -1029,6 +1047,13 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = 1711A78421995C2600215CAF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		17C1BF2F21B516B700DCEDD8 /* libSpeechSynthesizer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSpeechSynthesizer.a;
+			remoteRef = 17C1BF2E21B516B700DCEDD8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		17D39E6121803F6E00DC7C91 /* libReactNativeLocalization.a */ = {
@@ -1270,7 +1295,7 @@
 				C5B29342D3834DF6A564D015 /* SimpleLineIcons.ttf in Resources */,
 				A7BAF1939C75487D8552A6AC /* Entypo.ttf in Resources */,
 				552F04CFDE344F19BA2268A0 /* FontAwesome.ttf in Resources */,
-				171CCC2321AE72F200269DFE /* www in Resources */,
+				17C1BFA821B5275700DCEDD8 /* www in Resources */,
 				A0F6433A922A4C45993E593F /* Foundation.ttf in Resources */,
 				85D4F0964C2849A7B63E2335 /* Ionicons.ttf in Resources */,
 				36802B10D0394F32AF879046 /* MaterialCommunityIcons.ttf in Resources */,
@@ -1406,8 +1431,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-speech",
 					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 					"$(SRCROOT)/../node_modules/react-native-voice/ios/Voice",
-					"$(SRCROOT)\..\node_modules\react-native-speech",
-					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
+					"$(SRCROOT)..\node_modules\neact-native-speech",
+					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 				);
 				INFOPLIST_FILE = MMSRTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1442,8 +1467,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-speech",
 					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 					"$(SRCROOT)/../node_modules/react-native-voice/ios/Voice",
-					"$(SRCROOT)\..\node_modules\react-native-speech",
-					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
+					"$(SRCROOT)..\node_modules\neact-native-speech",
+					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 				);
 				INFOPLIST_FILE = MMSRTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1477,11 +1502,19 @@
 					"$(SRCROOT)/../node_modules/react-native-localization",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
-					"$(SRCROOT)..\node_modules\neact-native-speech",
-					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-speech",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-ttsiosTextToSpeech",
 					"$(SRCROOT)/../node_modules/react-native-voice/ios/Voice",
-					"$(SRCROOT)\..\node_modules\react-native-speech",
-					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-speech",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-ttsiosTextToSpeech/**",
 				);
 				INFOPLIST_FILE = MMSR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1506,11 +1539,19 @@
 					"$(SRCROOT)/../node_modules/react-native-localization",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
-					"$(SRCROOT)..\node_modules\neact-native-speech",
-					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-speech",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-ttsiosTextToSpeech",
 					"$(SRCROOT)/../node_modules/react-native-voice/ios/Voice",
-					"$(SRCROOT)\..\node_modules\react-native-speech",
-					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-speech",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-ttsiosTextToSpeech/**",
 				);
 				INFOPLIST_FILE = MMSR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1544,8 +1585,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-speech",
 					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 					"$(SRCROOT)/../node_modules/react-native-voice/ios/Voice",
-					"$(SRCROOT)\..\node_modules\react-native-speech",
-					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
+					"$(SRCROOT)..\node_modules\neact-native-speech",
+					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 				);
 				INFOPLIST_FILE = "MMSR-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1589,8 +1630,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-speech",
 					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 					"$(SRCROOT)/../node_modules/react-native-voice/ios/Voice",
-					"$(SRCROOT)\..\node_modules\react-native-speech",
-					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
+					"$(SRCROOT)..\node_modules\neact-native-speech",
+					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 				);
 				INFOPLIST_FILE = "MMSR-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1633,8 +1674,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-speech",
 					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 					"$(SRCROOT)/../node_modules/react-native-voice/ios/Voice",
-					"$(SRCROOT)\..\node_modules\react-native-speech",
-					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
+					"$(SRCROOT)..\node_modules\neact-native-speech",
+					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 				);
 				INFOPLIST_FILE = "MMSR-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1677,8 +1718,8 @@
 					"$(SRCROOT)..\node_modules\neact-native-speech",
 					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 					"$(SRCROOT)/../node_modules/react-native-voice/ios/Voice",
-					"$(SRCROOT)\..\node_modules\react-native-speech",
-					"$(SRCROOT)\..\node_modules\react-native-tts\ios\TextToSpeech",
+					"$(SRCROOT)..\node_modules\neact-native-speech",
+					"$(SRCROOT)..\node_modules\neact-native-ttsiosTextToSpeech",
 				);
 				INFOPLIST_FILE = "MMSR-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

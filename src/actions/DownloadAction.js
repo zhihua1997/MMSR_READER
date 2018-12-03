@@ -9,7 +9,7 @@ export const downloadStorybook = ({ storybook }) => {
     return dispatch => {
         db.transaction( tx => {
             tx.executeSql(
-                "INSERT INTO storybooklibrary(storybookID, languageCode, title, description, ageGroupCode, adminId, media) VALUES (?,?,?,?,?,?,?);",
+                "INSERT INTO storybooklibrary (storybookID, languageCode, title, description, ageGroupCode, adminId, media) VALUES (?,?,?,?,?,?,?);",
                 [
                     storybook.storybookID,
                     storybook.languageCode,
