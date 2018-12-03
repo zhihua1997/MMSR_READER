@@ -15,7 +15,7 @@ class FirstPage extends Component {
             isLoad: false
           };
 
-        db.transaction(tx => {
+      /*  db.transaction(tx => {
             tx.executeSql(
               "SELECT * FROM language WHERE languageCode=?",
               ["EN"],
@@ -27,7 +27,7 @@ class FirstPage extends Component {
                 }
               }
             );
-          });
+          });*/
     }
 
     overLangEN = () => {

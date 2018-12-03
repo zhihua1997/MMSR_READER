@@ -204,9 +204,47 @@ export const getStory = ({ storybookID, languageCode }) => {
               Alert.aler("No content Inside");
               noStory(dispatch);
           } else {
+            
               StoryGet(dispatch, responseJson);
               saveUser("story_token", JSON.stringify(responseJson));
               Actions.storybook();
+          }
+          
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+  }
+}
+
+export const translateStory = ({ storybookID, languageCode }) => {
+  return dispatch => {
+    console.log(storybookID, languageCode);
+      fetch(
+        "http://mmsrtaruc.000webhostapp.com/ReaderApp/get_content.php", 
+          {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              storybookID: storybookID,
+              languageCode: languageCode
+          })
+        }
+      )
+      .then(response => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+          if (responseJson === null) {
+              Alert.aler("No content Inside");
+              noStory(dispatch);
+          } else {
+            
+              StoryGet(dispatch, responseJson);
+              saveUser("story_token", JSON.stringify(responseJson));
+              Actions.storybook({ key: "reload" });
           }
           
       })
