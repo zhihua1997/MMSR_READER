@@ -11,6 +11,7 @@ export const NO_STORYCONTENT = "no_storycontent";
 
 export const GET_STORY = "get_story";
 export const NO_STORY = "no_story";
+export const DOWNLOAD_STORY = "download-story";
 
 export const FEEDBACK_SUCCESS = "feedback_success";
 export const FEEDBACK_FAIL = "feedback_fail";

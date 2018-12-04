@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { Actions } from "react-native-router-flux";
 import { Thumbnail, Container, Content } from 'native-base';
 import { Input } from '../tools';
-import { getStoryContent } from "../actions";
+import { getStoryContent, DownloadStoryBook } from "../actions";
 import { connect } from 'react-redux';
 import { strings } from '../localization'
 
@@ -72,6 +72,7 @@ class ContentStory extends Component {
         //storybookID, languageCode = this.props;
 
         this.props.getStoryContent({ storybookID, languageCode });
+        this.props.DownloadStoryBook({ storybookID, languageCode });
 
         console.log(storybookID, languageCode);
     }
@@ -157,4 +158,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(null, { getStoryContent })(ContentStory); 
+export default connect(null, { getStoryContent, DownloadStoryBook })(ContentStory); 

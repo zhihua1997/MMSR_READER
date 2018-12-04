@@ -3,7 +3,8 @@ import { View, Text, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Content, List, ListItem, Thumbnail } from 'native-base';
 import { connect } from 'react-redux';
-import { logoutUser, getStoryBook } from '../actions/AuthAction';
+import { logoutUser, getStoryBook  } from '../actions/AuthAction';
+import { downloadedList  } from '../actions/DownloadAction';
 
 
 
@@ -20,6 +21,10 @@ class menu extends Component {
 
     showStorybookFunction() {
         this.props.getStoryBook();
+    }
+
+    downloadListFunction() {
+        this.props.downloadedList()
     }
 
 
@@ -48,7 +53,7 @@ class menu extends Component {
                             </ListItem>
                         </List>
                         <List>
-                            <ListItem onPress={()=> Actions.introduce()}>
+                            <ListItem onPress={this.downloadListFunction.bind(this)}>
                                 <Text>Menu 2</Text>
                             </ListItem>
                         </List>
@@ -69,4 +74,4 @@ class menu extends Component {
     }
 }
 
-export default connect(null, { getStoryBook })(menu);
+export default connect(null, { getStoryBook, downloadedList  })(menu);

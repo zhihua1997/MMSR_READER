@@ -1,7 +1,7 @@
 import { Alert, Keyboard, AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { EMAIL_CHANGE, PASSWORD_CHANGE, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, NO_STORYBOOK, SHOW_STORYBOOK,
-  GET_STORYCONTENT, NO_STORYCONTENT, NO_STORY, GET_STORY, FEEDBACK_FAIL, FEEDBACK_SUCCESS } from './types';
+  GET_STORYCONTENT, NO_STORYCONTENT, NO_STORY, GET_STORY, FEEDBACK_FAIL, FEEDBACK_SUCCESS, DOWNLOAD_STORY } from './types';
 
 export const emailChanged = (text) => {
   return {
@@ -254,6 +254,40 @@ export const translateStory = ({ storybookID, languageCode }) => {
   }
 }
 
+export const DownloadStoryBook = ({ storybookID, languageCode }) => {
+  return dispatch => {
+    console.log(storybookID, languageCode);
+      fetch(
+        "http://mmsrtaruc.000webhostapp.com/ReaderApp/get_content.php", 
+          {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              storybookID: storybookID,
+              languageCode: languageCode
+          })
+        }
+      )
+      .then(response => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+          if (responseJson === null) {
+              Alert.aler("No content Inside");
+              noStory(dispatch);
+          } else {
+              downloadStory(dispatch, responseJson);
+          }
+          
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+  }
+}
+
 
 const noStory = dispatch => {
   dispatch({
@@ -264,6 +298,13 @@ const noStory = dispatch => {
 const StoryGet = (dispatch, storybook) => {
   dispatch({
       type: GET_STORY,
+      payload: storybook
+  });
+};
+
+const downloadStory = (dispatch, storybook) => {
+  dispatch({
+      type: DOWNLOAD_STORY,
       payload: storybook
   });
 };

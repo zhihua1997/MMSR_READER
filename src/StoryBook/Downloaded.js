@@ -10,9 +10,8 @@ import {
   Label,
 } from "native-base";
 import { Actions } from "react-native-router-flux";
-import Top from './Top'
-import ContentStory from './ContentStory';
-
+import Top from '../component/Top'
+import ContentStory from '../component/ContentStory';
 
 
 class Downloaded extends Component {
@@ -26,5 +25,6 @@ class Downloaded extends Component {
         );
     }
 }
+
 
  export default Downloaded;

@@ -5,7 +5,7 @@ import SecondScreen from './component/SecondScreen';
 import RegisterForm from './Auth/RegisterForm';
 import FirstPage from './component/FirstPage';
 import { strings } from './localization';
-import Downloaded from './component/Downloaded';
+import Downloaded from './StoryBook/Downloaded';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ContentStory from './component/ContentStory'
 import TryContent from './component/TryContent'
@@ -65,7 +65,7 @@ const RouterComponent = ({ initial, props }) => {
 				>
 					<Scene key="downloaded"
 						component={Downloaded}
-						title="Downloaded"
+						title="Library"
 						renderRightButton={<Icon name="ellipsis-v" size={30} color="#000" style={{ marginRight: 10 }} onPress={() => Actions.firstPage()} />}
 					/>
 					<Scene

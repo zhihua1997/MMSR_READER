@@ -113,6 +113,7 @@ class Introduce extends Component {
                 </View>
                 <View style={styles.viewBox}>
                 <Text>{this.state.age}</Text>
+                <Text>{this.props.storyBook[1].content}</Text>
                 </View>
                 <Button onPress={()=> this.getStoryFunction(this.state.storybookID[0], this.state.languageCode[0])}>
                     Read
@@ -145,5 +146,10 @@ const styles = {
         marginTop: 15,
     }
 }
+const mapStateToProps = state => {
+    const { storyBook } = state.story;
+  
+    return { storyBook };
+  };
 
-export default connect(null, { getStory, downloadStorybook })(Introduce);
+export default connect(mapStateToProps, { getStory, downloadStorybook })(Introduce);

@@ -1,4 +1,4 @@
-import { GET_STORY, NO_STORY } from '../actions/types';
+import { DOWNLOAD_STORY, GET_STORY, NO_STORY } from '../actions/types';
 
 const STORY_BOOK_STATE = {
     storybookID: '',
@@ -12,6 +12,8 @@ export default (state = STORY_BOOK_STATE, action) => {
         case NO_STORY:
             return { ...state, isLoading: false };
         case GET_STORY:
+            return { ...state, isLoading: false, storyBook: action.payload };
+        case DOWNLOAD_STORY:
             return { ...state, isLoading: false, storyBook: action.payload };
         default:
             return state;
