@@ -67,6 +67,7 @@ class Introduce extends Component {
     
     onDownload(){
         this.savebook();
+
         this.onSave();
     }
     
@@ -160,7 +161,7 @@ class Introduce extends Component {
                 </View>
                 <View style={styles.viewBox}>
                 <Text>{this.state.age}</Text>
-                <Text>{this.props.storyBook[0].languageCode}</Text>
+               
                 </View>
                 <Button onPress={()=> this.getStoryFunction(this.state.storybookID[0], this.state.languageCode[0])}>
                     Read
@@ -168,6 +169,7 @@ class Introduce extends Component {
                 <Button onPress={this.onDownload.bind(this)}>
                     Download
                 </Button>
+               
             </View>
         );
     }
@@ -198,5 +200,5 @@ const mapStateToProps = state => {
   
     return { storyBook };
   };
-
+  
 export default connect(mapStateToProps, { getStory, downloadStorybook, createStorybook })(Introduce);

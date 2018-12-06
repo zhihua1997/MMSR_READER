@@ -1,7 +1,7 @@
 import { opendb } from "../db/db";
 import { Actions } from "react-native-router-flux";
 import { DOWNLOAD_SUCCESS } from "./types";
-import { Alert } from "react-native";
+import { Alert, AsyncStorage } from "react-native";
 
 const db = opendb();
 
@@ -68,6 +68,7 @@ export const downloadStorybook = ({ storybook }) => {
                     
                    if(typeof id == "undefined") {
                        InsertStorybook(storybook);
+                       Alert.alert("Download Success");
                        console.log("dail");
                    }
                    else {
@@ -80,15 +81,17 @@ export const downloadStorybook = ({ storybook }) => {
                     if ( lan1 != storybook.languageCode && lan2 != storybook.languageCode && lan3 != storybook.languageCode) {
                         console.log("fail");
                          UpdateStorybook(title, lan, storybook);
+                         Alert.alert("Download Success");
                     } 
                     else {
+                        Alert.alert("This Book had Downloaded");
                        console.log("this book you downloaded");
                    }
                 }
             }
             );
         });
-        Alert.alert("Download Success");
+        
         Actions.introduce();
     };
 };
@@ -98,30 +101,44 @@ export const createStorybook = ({ storybook }) => {
 
       db.transaction(tx => {
         tx.executeSql(
-            "SELECT storybookID, languageCode from storybook WHERE storybookID = ? AND languageCode = ?;",
+            "SELECT storybookID, languageCode from storybook WHERE storybookID = ?;",
             [   
-                storybook.storybookID,
-                storybook.languageCode,   
+                storybook.storybookID, 
             ],
             (tx, results) => {
                 const id = results.rows.item(0);
+                let count = 0;
 
                if(typeof id == "undefined") {
                    InsertStory(storybook);
+                   Alert.alert("Download Success");
                    console.log("success");
                }
-               else{
-                   const lan = results.rows.item(0).languageCode;
-                   const sId = results.rows.item(0).storybookID;
+               else {
+                   var len = results.rows.length;
+                   for(let i = 0; i < len; i++){
+                   const lan = results.rows.item(i).languageCode;
+                   
                    console.log(lan, storybook.languageCode2[0]);
-                   if ( sId == storybook.storybookID && lan == storybook.languageCode2) {
+                   if (lan == storybook.languageCode2[0]) {
+                    //Alert.alert("Storybook Exist");
+                    count++;
                     console.log("storybook exist");
                    }
                    else {
-                    //InsertStory(storybook);
+                        //InsertStory(storybook);
+                        console.log(results.rows.item(i));
                        console.log("storybook store");
+                      // Alert.alert("Download Success");
                    }
-               }
+                }
+                if (count < 1){
+                    InsertStory(storybook);
+                }
+                else {
+                    console.log("storybook exist");
+                }    
+            }
         } 
         );
       });
@@ -141,10 +158,28 @@ export const downloadedList = () => {
             dl[i] = row;
             console.log(dl[i]);
           }
-          dispatch({ type: DOWNLOAD_SUCCESS, paylod: dl });
+          //console.log(dl);
+          downloadSuccess(dispatch, dl);
+          saveUser("download_token", JSON.stringify(dl));
           }
         );
       });
+      Actions.localstorycontent();
     };
+  };
+
+  const downloadSuccess = (dispatch, storybook) => {
+    dispatch({
+      type: DOWNLOAD_SUCCESS,
+      payload: storybook
+    });
+  };
+
+  const saveUser = async (item, selectedValue) => {
+    try {
+      await AsyncStorage.setItem(item, selectedValue);
+    } catch (error) {
+      console.error("AsyncStorage error: " + error.message);
+    }
   };
 
