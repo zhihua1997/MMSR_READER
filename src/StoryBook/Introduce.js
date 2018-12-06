@@ -4,7 +4,7 @@ import { Content, List, ListItem, Thumbnail } from 'native-base';
 import { Button } from '../tools';
 import { connect } from 'react-redux';
 import { getStory } from '../actions';
-import { downloadStorybook } from '../actions/DownloadAction';
+import { downloadStorybook, createStorybook } from '../actions/DownloadAction';
 
 class Introduce extends Component {
     constructor(props){
@@ -19,6 +19,12 @@ class Introduce extends Component {
             age: [],
             title: [],
             media: [],
+
+            storybookID2: [],
+            pageNo: [],
+            media2: [],
+            content: [],
+            languageCode2: [],
         }
     }
 
@@ -59,6 +65,11 @@ class Introduce extends Component {
 
     }
     
+    onDownload(){
+        this.savebook();
+        this.onSave();
+    }
+    
     onSave() {
         const { 
             storybookID,
@@ -67,7 +78,12 @@ class Introduce extends Component {
             languageCode,
             age,
             title,
-            media
+            media,
+            storybookID2,
+            pageNo,
+            content,
+            media2,
+            languageCode2,
         } = this.state;
 
         const storybook = {
@@ -78,9 +94,18 @@ class Introduce extends Component {
             age,
             title,
             media,
+            storybookID2,
+            pageNo,
+            content,
+            media2,
+            languageCode2,
         };
         
         this.props.downloadStorybook({
+            storybook
+        });
+
+        this.props.createStorybook({
             storybook
         });
     }
@@ -92,9 +117,31 @@ class Introduce extends Component {
         //storybookID, languageCode = this.props;
 
         this.props.getStory({ storybookID, languageCode });
-
+        
         console.log(storybookID, languageCode);
     }
+
+    savebook() {
+        var storybookID2 = [];
+        var pageNo = [];
+        var media2 = [];
+        var content = [];
+        var languageCode2 = [];
+        const len = this.props.storyBook.length;
+        for (let i = 0; i < len; i++){
+                storybookID2 = this.props.storyBook[i].storybookID;
+                pageNo = this.props.storyBook[i].pageNo;
+                media2 = this.props.storyBook[i].media;
+                content = this.props.storyBook[i].content;
+                languageCode2 = this.props.storyBook[i].languageCode;
+                this.state.storybookID2.push(storybookID2);
+              this.state.pageNo.push(pageNo);
+              this.state.media2.push(media2);
+              this.state.content.push(content);
+              this.state.languageCode2.push(languageCode2);
+        }
+    }
+    
 
     render() {
         return (
@@ -113,12 +160,12 @@ class Introduce extends Component {
                 </View>
                 <View style={styles.viewBox}>
                 <Text>{this.state.age}</Text>
-                <Text>{this.props.storyBook[1].content}</Text>
+                <Text>{this.props.storyBook[0].languageCode}</Text>
                 </View>
                 <Button onPress={()=> this.getStoryFunction(this.state.storybookID[0], this.state.languageCode[0])}>
                     Read
                 </Button>
-                <Button onPress={this.onSave.bind(this)}>
+                <Button onPress={this.onDownload.bind(this)}>
                     Download
                 </Button>
             </View>
@@ -152,4 +199,4 @@ const mapStateToProps = state => {
     return { storyBook };
   };
 
-export default connect(mapStateToProps, { getStory, downloadStorybook })(Introduce);
+export default connect(mapStateToProps, { getStory, downloadStorybook, createStorybook })(Introduce);

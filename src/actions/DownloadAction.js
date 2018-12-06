@@ -22,6 +22,24 @@ const InsertStorybook = (storybook) => {
         });
 };
 
+const InsertStory = (storybook) => {
+    const len = storybook.storybookID2.length;
+    for (let i = 0; i < len; i++){
+    db.transaction( tx => {
+        tx.executeSql(
+                "INSERT INTO storybook (storybookID, pageNo, content, languageCode, media) VALUES (?,?,?,?,?);",
+                [
+                    storybook.storybookID2[i],
+                    storybook.pageNo[i],
+                    storybook.content[i],
+                    storybook.languageCode2[i],
+                    storybook.media2[i],
+                ]
+        );
+     });
+    }
+};
+
 const UpdateStorybook = (title, lan, storybook) => {
     let language = lan + " " + storybook.languageCode;
     let title1 = title + "/" + storybook.title;
@@ -47,7 +65,7 @@ export const downloadStorybook = ({ storybook }) => {
                 ],
                 (tx, results) => {
                     const id = results.rows.item(0);
-
+                    
                    if(typeof id == "undefined") {
                        InsertStorybook(storybook);
                        console.log("dail");
@@ -74,6 +92,41 @@ export const downloadStorybook = ({ storybook }) => {
         Actions.introduce();
     };
 };
+
+export const createStorybook = ({ storybook }) => {
+    return dispatch => {
+
+      db.transaction(tx => {
+        tx.executeSql(
+            "SELECT storybookID, languageCode from storybook WHERE storybookID = ? AND languageCode = ?;",
+            [   
+                storybook.storybookID,
+                storybook.languageCode,   
+            ],
+            (tx, results) => {
+                const id = results.rows.item(0);
+
+               if(typeof id == "undefined") {
+                   InsertStory(storybook);
+                   console.log("success");
+               }
+               else{
+                   const lan = results.rows.item(0).languageCode;
+                   const sId = results.rows.item(0).storybookID;
+                   console.log(lan, storybook.languageCode2[0]);
+                   if ( sId == storybook.storybookID && lan == storybook.languageCode2) {
+                    console.log("storybook exist");
+                   }
+                   else {
+                    //InsertStory(storybook);
+                       console.log("storybook store");
+                   }
+               }
+        } 
+        );
+      });
+    };
+}; 
 
 export const downloadedList = () => {
     return dispatch => {
