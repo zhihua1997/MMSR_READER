@@ -17,3 +17,4 @@ export const FEEDBACK_SUCCESS = "feedback_success";
 export const FEEDBACK_FAIL = "feedback_fail";
 
 export const DOWNLOAD_SUCCESS = "download_success";
+export const DOWNLOAD_CONTENT = "download_content";

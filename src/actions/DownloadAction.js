@@ -1,6 +1,6 @@
 import { opendb } from "../db/db";
 import { Actions } from "react-native-router-flux";
-import { DOWNLOAD_SUCCESS } from "./types";
+import { DOWNLOAD_SUCCESS, DOWNLOAD_CONTENT } from "./types";
 import { Alert, AsyncStorage } from "react-native";
 
 const db = opendb();
@@ -164,7 +164,7 @@ export const downloadedList = () => {
           }
         );
       });
-      Actions.localstorycontent();
+      Actions.localstorycontent({ key:"reload" });
     };
   };
 
@@ -181,5 +181,99 @@ export const downloadedList = () => {
     } catch (error) {
       console.error("AsyncStorage error: " + error.message);
     }
+  };
+
+ 
+
+  const dlDefaultLanguage = (storybook) => {
+        let dl = [];
+        console.log(storybook.storybookID, storybook.languageCode)
+          db.transaction(tx => {
+            tx.executeSql(
+              "SELECT * FROM storybook WHERE storybookID = ? AND languageCode = ?;",
+              [
+                  storybook.storybookID,
+                  storybook.languageCode,
+                ],
+              (tx, results) => {
+                const len = results.rows.length;
+                for (let i = 0; i < len; i++) {
+                let row = results.rows.item(i);
+                dl[i] = row;
+                console.log(dl[i]);
+              }
+              console.log(dl);
+              //downloadContent(dispatch, dl);
+              //saveUser("download_token", JSON.stringify(dl));
+              }
+            );
+          });
+          //Actions.localstorycontent({ key:"reload" });
+  }
+
+  const dlNotDefaultLanguage = (storybook) => {
+        let dl = [];
+        const lan = storybook.languageCode2;
+        let lan1 = lan.substring(0, 2);
+        //console.log(storybook.storybookID, storybook.languageCode2)
+          db.transaction(tx => {
+            tx.executeSql(
+              "SELECT * FROM storybook WHERE storybookID = ? AND languageCode = ?;",
+              [
+                  storybook.storybookID,
+                  lan1,
+                ],
+              (tx, results) => {
+                const len = results.rows.length;
+                for (let i = 0; i < len; i++) {
+                let row = results.rows.item(i);
+                dl[i] = row;
+                console.log(dl[i]);
+              }
+              console.log(dl);
+              //downloadContent(dispatch, dl);
+              //saveUser("download_token", JSON.stringify(dl));
+              }
+            );
+          });
+          //Actions.localstorycontent({ key:"reload" });
+  }
+
+  export const downloadedContent = ({ storybook }) => {
+    return dispatch => {
+    let dl = [];
+    const lan = storybook.languageCode;
+    let lan1 = lan.substring(0, 2);
+    console.log(storybook.storybookID, lan1)
+      db.transaction(tx => {
+        tx.executeSql(
+          "SELECT * FROM storybook WHERE storybookID = ? AND languageCode = ?;",
+          [
+              storybook.storybookID,
+              lan1,
+            ],
+          (tx, results) => {
+              
+          if (typeof results.rows.item(0) == "undefined") {
+              //console.log("hi");
+              console.log("hey");
+              dlNotDefaultLanguage(storybook);
+          }
+          else {
+            dlDefaultLanguage(storybook);
+          }
+          //saveUser("download_token", JSON.stringify(dl));
+          }
+        );
+      });
+      //Actions.localstorycontent({ key:"reload" });
+    };
+  };
+
+  const downloadContent = (dispatch, storybook) => {
+    dispatch({
+      type: DOWNLOAD_CONTENT,
+      payload: storybook
+    });
   };
 

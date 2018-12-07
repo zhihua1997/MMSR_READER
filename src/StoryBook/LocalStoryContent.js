@@ -8,7 +8,8 @@ import { Thumbnail, Container, Content } from 'native-base';
 import { Input } from '../tools';
 import { getStoryContent, DownloadStoryBook } from "../actions";
 import { connect } from 'react-redux';
-import { strings } from '../localization'
+import { strings } from '../localization';
+import { downloadedContent } from '../actions/DownloadAction'
 
 /*const data = [
     { key: 'A'}, { key: 'B'}, { key: 'C'}, { key: 'D'}, { key: 'E'}, { key: 'F'}, { key: 'G'}, { key: 'H'},
@@ -36,7 +37,8 @@ class LocalStoryContent extends Component {
         this.state = {
             loading: false,
             data: [],
-            title:[],
+            storybookID: [],
+            languageCode: "",
             /*stateData: formatData(data, numColumns),
             error: null,
             query: "",
@@ -46,21 +48,23 @@ class LocalStoryContent extends Component {
 
 
     componentDidMount() {
-            const Alldata = this.props.downLoad;
-            //console.log(strings.default);
+        AsyncStorage.getItem("download_token").then(token =>{
+            const Alldata = JSON.parse(token);
+            console.log(Alldata);
             const len = Alldata.length; 
             var result = [];
             for (let i=0; i < len; i++) {
               result = Alldata[i].storybookID;
               //console.log(result);
-              this.state.title.push(result);
+              this.state.storybookID.push(result);
             }
             this.setState({
                 data: formatData(Alldata, numColumns),
-                
+                loading: token !== null,
+                languageCode: strings.default,
             });
             //console.log(JSON.parse(token));
-        
+        });
         //console.log(this.props.downLoad);
         
     }
@@ -84,6 +88,22 @@ class LocalStoryContent extends Component {
         this.setState({ formatQuery, stateData });
     }
 
+    onSave(storybookID, languageCode2) {
+        const { 
+            languageCode,
+        } = this.state;
+
+        const storybook = {
+            storybookID,
+            languageCode,
+            languageCode2,
+        };
+
+        this.props.downloadedContent({
+            storybook
+        });
+    }
+
     renderHeader = () => {
         return <SearchBar
         round
@@ -103,7 +123,7 @@ class LocalStoryContent extends Component {
             return <View style={[styles.item, styles.itemInvisible]}/>;
         }
         return ( 
-        <TouchableOpacity onPress={()=>this.getContentFunction(item.storybookID, strings.default)} style={styles.item}>
+        <TouchableOpacity onPress={()=>this.onSave(item.storybookID, item.languageCode)} style={styles.item}>
         <Text value={this.props.storybookID}>{item.storybookID}</Text>
             <View style={styles.item}>
                 <Image style={{width: 66, height: 58}} 
@@ -163,4 +183,4 @@ const mapStateToProps = state => {
     return { downLoad };
 };
 
-export default connect(mapStateToProps, { getStoryContent, DownloadStoryBook })(LocalStoryContent); 
+export default connect(mapStateToProps, { getStoryContent, DownloadStoryBook, downloadedContent })(LocalStoryContent); 
