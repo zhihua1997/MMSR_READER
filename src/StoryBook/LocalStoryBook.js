@@ -5,7 +5,7 @@ import { Button } from '../tools';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import StarRating from 'react-native-star-rating';
 import { connect } from 'react-redux';
-import { translateStory } from '../actions';
+import { translateContent } from '../actions/DownloadAction';
 //import Speech from 'react-native-speech';
 //import Tts from 'react-native-tts';
 import Tts from "react-native-tts";
@@ -13,7 +13,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 
 const items = [{ value: "EN" }, { value: "BM" }, { value: "ZH" }];
 
-class StoryBook extends Component {
+class LocalStoryBook extends Component {
     constructor(props) {
         super(props);
 
@@ -30,13 +30,14 @@ class StoryBook extends Component {
             speechRate: 0.3,
             speechPitch: 1,
             refresh: false,
+            
         }
     }
 
 
 
     componentDidMount() {
-        this.getS();
+        this.data();
     }
 
 
@@ -47,7 +48,8 @@ class StoryBook extends Component {
     }
 
     data() {
-        AsyncStorage.getItem("story_token").then(token => {
+        
+        AsyncStorage.getItem("downloadContent_token").then(token => {
             const Alldata = JSON.parse(token);
             console.log(Alldata);
             const len = Alldata.length;
@@ -117,9 +119,18 @@ class StoryBook extends Component {
         //const { storybookID } = this.props;
         //console.log(this.props.storybookID);
         //storybookID, languageCode = this.props;
-        this.reload();
-        this.props.translateStory({ storybookID, languageCode });
 
+        const storybook = {
+            storybookID,
+            languageCode,
+        };
+
+        this.reload();
+        this.props.translateContent({ 
+            storybook
+         });
+
+       
         console.log(storybookID, languageCode);
     }
 
@@ -210,4 +221,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default connect(null, { translateStory })(StoryBook);
+export default connect(null, { translateContent })(LocalStoryBook);

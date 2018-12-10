@@ -39,6 +39,7 @@ class LocalStoryContent extends Component {
             data: [],
             storybookID: [],
             languageCode: "",
+            refreshing: false,
             /*stateData: formatData(data, numColumns),
             error: null,
             query: "",
@@ -104,6 +105,16 @@ class LocalStoryContent extends Component {
         });
     }
 
+    handleRefresh = () => {
+        this.setState({
+            refreshing: true,
+        })
+        this.componentDidMount();
+        this.setState({
+            refreshing: false,
+        })
+    }
+
     renderHeader = () => {
         return <SearchBar
         round
@@ -145,11 +156,13 @@ class LocalStoryContent extends Component {
             
             <FlatList
                  data={this.state.data}
-                style= {styles.container}
+                style={styles.container}
                 renderItem={this.renderItem}
                 numColumns={numColumns}
                 //ListHeaderComponent={this.renderHeader}
                 //onPress={() => Actions.introduce({ title: 'data' })}
+                refreshing={this.state.refreshing}
+                onRefresh={this.handleRefresh}
             />
             
         );

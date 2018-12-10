@@ -10,19 +10,38 @@ import {
   TextInput,
   Keyboard
 } from "react-native";
+import { Dropdown } from 'react-native-material-dropdown';
 //import Tts from "react-native-tts";
 
 //import Voice from 'react-native-voice';
 
-type Props = {};
-class Feedback extends Component<Props> {
-  render(){
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Drawer 2</Text>
-        </View>
-    );
+
+class Feedback extends Component {
+
+  getStoryFunction(languageCode) {
+    //const { storybookID } = this.props;
+    //console.log(this.props.storybookID);
+    //storybookID, languageCode = this.props;
+   
+    console.log(languageCode);
 }
+  render() {
+    let data = [{
+      value: 'Banana',
+    }, {
+      value: 'Mango',
+    }, {
+      value: 'Pear',
+    }];
+
+    return (
+      <Dropdown
+        label='Favorite Fruit'
+        data={data}
+        onChangeText={(value) => this.getStoryFunction(value)}
+      />
+    );
+  }
 }
 
 

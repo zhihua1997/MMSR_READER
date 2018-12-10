@@ -54,7 +54,7 @@ class menu extends Component {
                         </List>
                         <List>
                             <ListItem onPress={this.downloadListFunction.bind(this)}>
-                                <Text>Menu 2</Text>
+                                <Text>Downloaded</Text>
                             </ListItem>
                         </List>
                         <List>

@@ -25,6 +25,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		15B18B63AD704E5EB8638A58 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB4D0C02DE284D2A930CA9BD /* Feather.ttf */; };
 		1711A7D32199602400215CAF /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1711A7AA2199602400215CAF /* libsqlite3.0.tbd */; };
+		1748AD5C21BE42F7003F4506 /* libTextToSpeech.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1748AD5B21BE4293003F4506 /* libTextToSpeech.a */; };
 		17C1BFA821B5275700DCEDD8 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 17C1BFA721B5275700DCEDD8 /* www */; };
 		17D39E632180407400DC7C91 /* react-native-localization in Resources */ = {isa = PBXBuildFile; fileRef = 17D39E622180407400DC7C91 /* react-native-localization */; };
 		231E8C5D3892425AB0671D5F /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A60A75B218E419599A4AE41 /* rubicon-icon-font.ttf */; };
@@ -140,6 +141,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
+		};
+		1748AD5421BE4264003F4506 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1748AD2721BE4264003F4506 /* TextToSpeech.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A6FB2081D99E12200593599;
+			remoteInfo = TextToSpeech;
+		};
+		1748AD5A21BE4293003F4506 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1748AD5621BE4293003F4506 /* TextToSpeech.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A6FB2081D99E12200593599;
+			remoteInfo = TextToSpeech;
 		};
 		17C1BF2E21B516B700DCEDD8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -393,6 +408,8 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		147713BC8B9346A6AB8DE684 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		1711A7AA2199602400215CAF /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		1748AD2721BE4264003F4506 /* TextToSpeech.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TextToSpeech.xcodeproj; path = "../node_modules/react-native-tts/ios/TextToSpeech.xcodeproj"; sourceTree = "<group>"; };
+		1748AD5621BE4293003F4506 /* TextToSpeech.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TextToSpeech.xcodeproj; path = "../node_modules/react-native-tts/ios/TextToSpeech.xcodeproj"; sourceTree = "<group>"; };
 		17C1BFA721B5275700DCEDD8 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = MMSR/www; sourceTree = "<group>"; };
 		17D39E622180407400DC7C91 /* react-native-localization */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "react-native-localization"; path = "../node_modules/react-native-localization"; sourceTree = "<group>"; };
 		22B9CA6B01164E47A31EE4BC /* SQLite.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
@@ -450,6 +467,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1748AD5C21BE42F7003F4506 /* libTextToSpeech.a in Frameworks */,
 				1711A7D32199602400215CAF /* libsqlite3.0.tbd in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -578,6 +596,7 @@
 		13B07FAE1A68108700A75B9A /* MMSR */ = {
 			isa = PBXGroup;
 			children = (
+				1748AD2721BE4264003F4506 /* TextToSpeech.xcodeproj */,
 				17C1BFA721B5275700DCEDD8 /* www */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -642,6 +661,22 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		1748AD2821BE4264003F4506 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1748AD5521BE4264003F4506 /* libTextToSpeech.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1748AD5721BE4293003F4506 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1748AD5B21BE4293003F4506 /* libTextToSpeech.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		17C1BF0421B516B700DCEDD8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -688,6 +723,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				1748AD5621BE4293003F4506 /* TextToSpeech.xcodeproj */,
 				17D39E622180407400DC7C91 /* react-native-localization */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -967,6 +1003,14 @@
 					ProductGroup = 1711A77C21995C2600215CAF /* Products */;
 					ProjectRef = 22B9CA6B01164E47A31EE4BC /* SQLite.xcodeproj */;
 				},
+				{
+					ProductGroup = 1748AD5721BE4293003F4506 /* Products */;
+					ProjectRef = 1748AD5621BE4293003F4506 /* TextToSpeech.xcodeproj */;
+				},
+				{
+					ProductGroup = 1748AD2821BE4264003F4506 /* Products */;
+					ProjectRef = 1748AD2721BE4264003F4506 /* TextToSpeech.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1047,6 +1091,20 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = 1711A78421995C2600215CAF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1748AD5521BE4264003F4506 /* libTextToSpeech.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTextToSpeech.a;
+			remoteRef = 1748AD5421BE4264003F4506 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1748AD5B21BE4293003F4506 /* libTextToSpeech.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTextToSpeech.a;
+			remoteRef = 1748AD5A21BE4293003F4506 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		17C1BF2F21B516B700DCEDD8 /* libSpeechSynthesizer.a */ = {

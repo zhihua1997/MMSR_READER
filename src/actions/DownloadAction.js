@@ -204,11 +204,11 @@ export const downloadedList = () => {
               }
               console.log(dl);
               //downloadContent(dispatch, dl);
-              //saveUser("download_token", JSON.stringify(dl));
+              saveUser("downloadContent_token", JSON.stringify(dl));
               }
             );
           });
-          //Actions.localstorycontent({ key:"reload" });
+        Actions.localstorybook({ key:"reload" });
   }
 
   const dlNotDefaultLanguage = (storybook) => {
@@ -218,7 +218,7 @@ export const downloadedList = () => {
         //console.log(storybook.storybookID, storybook.languageCode2)
           db.transaction(tx => {
             tx.executeSql(
-              "SELECT * FROM storybook WHERE storybookID = ? AND languageCode = ?;",
+              "SELECT * FROM storybook WHERE storybookID = ? AND languageCode = ? ORDER BY pageNo;",
               [
                   storybook.storybookID,
                   lan1,
@@ -232,11 +232,11 @@ export const downloadedList = () => {
               }
               console.log(dl);
               //downloadContent(dispatch, dl);
-              //saveUser("download_token", JSON.stringify(dl));
+              saveUser("downloadContent_token", JSON.stringify(dl));
               }
             );
           });
-          //Actions.localstorycontent({ key:"reload" });
+          Actions.localstorybook({ key:"reload" });
   }
 
   export const downloadedContent = ({ storybook }) => {
@@ -270,10 +270,59 @@ export const downloadedList = () => {
     };
   };
 
-  const downloadContent = (dispatch, storybook) => {
-    dispatch({
-      type: DOWNLOAD_CONTENT,
-      payload: storybook
-    });
+  const translateSuccess = (storybook) => {
+    let dl = [];
+    //console.log(storybook.storybookID, storybook.languageCode2)
+      db.transaction(tx => {
+        tx.executeSql(
+          "SELECT * FROM storybook WHERE storybookID = ? AND languageCode = ? ORDER BY pageNo;",
+          [
+              storybook.storybookID,
+              storybook.languageCode,
+            ],
+          (tx, results) => {
+            const len = results.rows.length;
+            for (let i = 0; i < len; i++) {
+            let row = results.rows.item(i);
+            dl[i] = row;
+            console.log(dl[i]);
+          }
+          console.log(dl);
+          //downloadContent(dispatch, dl);
+          saveUser("downloadContent_token", JSON.stringify(dl));
+          }
+        );
+      });
+      Actions.localstorybook({ key:"reload" });
+}
+
+  export const translateContent = ({ storybook }) => {
+    return dispatch => {
+    let dl = [];
+    const lan = storybook.languageCode;
+    let lan1 = lan.substring(0, 2);
+    console.log(storybook.storybookID, lan1)
+      db.transaction(tx => {
+        tx.executeSql(
+          "SELECT * FROM storybook WHERE storybookID = ? AND languageCode = ?;",
+          [
+              storybook.storybookID,
+              lan1,
+            ],
+          (tx, results) => {
+              
+          if (typeof results.rows.item(0) == "undefined") {
+              console.log("Not such Language");
+              //Alert.alert("Not such Language");
+          }
+          else {
+            translateSuccess(storybook);
+          }
+          //saveUser("download_token", JSON.stringify(dl));
+          }
+        );
+      });
+      //Actions.localstorycontent({ key:"reload" });
+    };
   };
 

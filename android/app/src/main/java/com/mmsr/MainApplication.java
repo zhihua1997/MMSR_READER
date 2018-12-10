@@ -26,10 +26,10 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-        new SQLitePluginPackage(),   // register SQLite Plugin here
+        new SQLitePluginPackage(),
         new MainReactPackage(),
-            new TextToSpeechPackage(),
             new VectorIconsPackage(),
+            new TextToSpeechPackage(),
             new ReactNativeLocalizationPackage()
       );
     }

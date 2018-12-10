@@ -26,7 +26,7 @@ class Introduce extends Component {
             content: [],
             languageCode2: [],
         }
-    }
+    }  
 
     componentDidMount() {
         AsyncStorage.getItem("storyContent_token").then(token => {
