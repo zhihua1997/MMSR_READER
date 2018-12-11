@@ -293,7 +293,7 @@ export const downloadedList = () => {
           }
         );
       });
-      Actions.localstorybook({ key:"reload" });
+      Actions.localstorybook();
 }
 
   export const translateContent = ({ storybook }) => {

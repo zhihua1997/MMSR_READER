@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage, AppRegistry, Image, Animated, Alert, Modal, Picker } from 'react-native';
-import { Content, List, ListItem, Thumbnail } from 'native-base';
+import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage, AppRegistry, Image, Animated, Alert, Modal } from 'react-native';
+import { Item, Picker } from 'native-base';
 import { Button } from '../tools';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import StarRating from 'react-native-star-rating';
@@ -19,7 +19,7 @@ class StoryBook extends Component {
 
         this.state = {
             loading: false,
-            storybookID: [],
+            languageCode: this.props.storyBook[0].languageCode,
             data: [],
             pageNo: [],
             media: [],
@@ -35,9 +35,29 @@ class StoryBook extends Component {
 
 
 
-    componentDidMount() {
-        this.getS();
+    componentWillMount() {
+        console.log("componentWillMount");
+        const languageCode = this.state.languageCode;
+        const storybookID = this.props.storyBook[0].storybookID;
+        this.props.translateStory({ storybookID, languageCode });
     }
+
+    componentWillReceiveProps(nextProps) {
+        //debugger;
+        //console.log(nextProps.downloadedStorybook[0].languageCode);
+        if (this.props.storyBook.length !== 0) {
+          if (
+            this.props.storyBook[0].languageCode ===
+            nextProps.storyBook[0].languageCode
+          ) {
+            console.log("same props, not need update");
+          } else {
+            const languageCode = this.state.languageCode;
+            const storybookID = this.props.storyBook[0].storybookID;
+            this.props.translateStory({ storybookID, languageCode });
+          }
+        }
+      }
 
 
     onStarRatingPress(rating) {
@@ -46,44 +66,6 @@ class StoryBook extends Component {
         });
     }
 
-    data() {
-        AsyncStorage.getItem("story_token").then(token => {
-            const Alldata = JSON.parse(token);
-            console.log(Alldata);
-            const len = Alldata.length;
-            var storybookID = [];
-            var pageNo = [];
-            var media = [];
-            var content = [];
-
-            for (let i = 0; i < len; i++) {
-                storybookID = Alldata[i].storybookID;
-                pageNo = Alldata[i].pageNo;
-                media = Alldata[i].media;
-                content = Alldata[i].content;
-
-                this.state.storybookID.push(storybookID);
-                this.state.pageNo.push(pageNo);
-                this.state.media.push(media);
-                this.state.content.push(content);
-
-            }
-            this.setState({
-                data: Alldata,
-                loading: token !== null,
-
-            });
-            console.log(this.state.data);
-        });
-    }
-
-    getS = async () => {
-        try {
-            await this.data();
-        } catch (error) {
-            console.error("AsyncStorage error: " + error.message);
-        }
-    }
 
     closeFeedback = () => {
         this.setState({
@@ -92,7 +74,7 @@ class StoryBook extends Component {
     }
 
     IncrementCount = () => {
-        const len = this.state.pageNo.length - 1;
+        const len = this.props.storyBook.length - 1;
         if (this.state.count < len) {
             this.setState({ count: this.state.count + 1 });
         }
@@ -113,11 +95,13 @@ class StoryBook extends Component {
         }
     }
 
-    getStoryFunction(storybookID, languageCode) {
+    getStoryFunction(storybookID, value) {
         //const { storybookID } = this.props;
         //console.log(this.props.storybookID);
         //storybookID, languageCode = this.props;
-        this.reload();
+        //this.reload();
+        this.setState({ languageCode: value });
+        const languageCode = this.state.languageCode;
         this.props.translateStory({ storybookID, languageCode });
 
         console.log(storybookID, languageCode);
@@ -132,7 +116,7 @@ class StoryBook extends Component {
         });
 
         //console.log(this.state.content);
-        this.componentDidMount();
+        //this.componentDidMount();
     }
 
     readText(item) {
@@ -151,20 +135,20 @@ class StoryBook extends Component {
               
                     label='Select languege: '
                     data={items}
-                    onChangeText={(value) => this.getStoryFunction(this.state.storybookID[0], value)}
+                    onChangeText={(value) => this.getStoryFunction(this.props.storyBook[0].storybookID, value)}
                     containerStyle={{ height: 50, width: 100 }}
                 />
                 <View>
                     <Image style={{ width: 100, height: 100 }}
-                        source={{ uri: 'data:image/png;base64,' + this.state.media[this.state.count] }} />
+                        source={{ uri: 'data:image/png;base64,' + this.props.storyBook[this.state.count].media }} />
                 </View>
-                <Text>{this.state.content[this.state.count]}</Text>
+                <Text>{this.props.storyBook[this.state.count].content}</Text>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Icon name="chevron-left" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.DecreaseCount} />
-                    <Text>{this.state.pageNo[this.state.count]}/{this.state.pageNo.length}</Text>
+                    <Text>{this.props.storyBook[this.state.count].pageNo}/{this.props.storyBook.length}</Text>
                     <Icon name="chevron-right" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.IncrementCount} />
                 </View>
-                <Button onPress={() => this.readText(this.state.content[this.state.count])} style={{ width: 50, height: 20 }} >
+                <Button onPress={() => this.readText(this.props.storyBook[this.state.count].content)} style={{ width: 50, height: 20 }} >
                     Speak
                 </Button>
                 <Modal visible={this.state.showMe} onRequestClose={() => console.warn("this is a close request")} >
@@ -210,4 +194,10 @@ const styles = StyleSheet.create({
     },
 })
 
-export default connect(null, { translateStory })(StoryBook);
+const mapStateToProps = state => {
+    const { storyBook } = state.story;
+  
+    return { storyBook };
+};
+
+export default connect(mapStateToProps, { translateStory })(StoryBook);

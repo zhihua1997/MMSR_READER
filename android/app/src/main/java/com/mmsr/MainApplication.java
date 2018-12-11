@@ -28,8 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new SQLitePluginPackage(),
         new MainReactPackage(),
-            new VectorIconsPackage(),
             new TextToSpeechPackage(),
+            new VectorIconsPackage(),
             new ReactNativeLocalizationPackage()
       );
     }

@@ -30,7 +30,6 @@ class LocalStoryBook extends Component {
             speechRate: 0.3,
             speechPitch: 1,
             refresh: false,
-            
         }
     }
 
