@@ -71,6 +71,7 @@ class FirstPage extends Component {
 
 const styles = {
     containerStyle: {
+        
         alignItems: "center",
         justifyContent: "center",
         height: 1500,

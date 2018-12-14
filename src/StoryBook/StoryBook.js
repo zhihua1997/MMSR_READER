@@ -5,7 +5,7 @@ import { Button } from '../tools';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import StarRating from 'react-native-star-rating';
 import { connect } from 'react-redux';
-import { translateStory } from '../actions';
+import { translateStory, starFeedback } from '../actions';
 //import Speech from 'react-native-speech';
 //import Tts from 'react-native-tts';
 import Tts from "react-native-tts";
@@ -32,7 +32,6 @@ class StoryBook extends Component {
             refresh: false,
         }
     }
-
 
 
     componentWillMount() {
@@ -68,9 +67,16 @@ class StoryBook extends Component {
 
 
     closeFeedback = () => {
+        
+        let rateValue = this.state.starCount.toString();
+        let userId = this.props.user.userId.toString();
+        let storybookID = this.props.storyBook[0].storybookID.toString();
         this.setState({
             showMe: false
-        })
+        });
+        console.log(rateValue, userId, storybookID);
+        this.props.starFeedback({ userId, storybookID, rateValue });
+
     }
 
     IncrementCount = () => {
@@ -79,7 +85,7 @@ class StoryBook extends Component {
             this.setState({ count: this.state.count + 1 });
         }
         else {
-            Alert.alert("This is the last Page");
+            //Alert.alert("This is the last Page");
             this.setState({
                 showMe: true
             })
@@ -196,8 +202,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     const { storyBook } = state.story;
-  
-    return { storyBook };
+    const { user } = state.auth;
+    return { storyBook, user };
 };
 
-export default connect(mapStateToProps, { translateStory })(StoryBook);
+export default connect(mapStateToProps, { translateStory, starFeedback })(StoryBook);

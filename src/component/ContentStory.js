@@ -105,9 +105,8 @@ class ContentStory extends Component {
         }
         return ( 
         <TouchableOpacity onPress={()=>this.getContentFunction(item.storybookID, strings.default)} style={styles.item}>
-        <Text value={this.props.storybookID}>{item.storybookID}</Text>
             <View style={styles.item}>
-                <Image style={{width: 66, height: 58}} 
+                <Image style={{width: 100, height: 90}} 
                 source={{uri:'data:image/png;base64,'+ item.coverPage }}/>
                <Text style={styles.itemText}>{item.title}</Text>
             </View>
@@ -143,7 +142,7 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     item: {
-        backgroundColor: '#4D243D',
+        backgroundColor: '#D3D3D3',
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
@@ -151,7 +150,7 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').width / numColumns,
     },
     itemText: {
-        color: '#FFF',
+        //color: '#FFF',
     },
     itemInvisible: {
         backgroundColor: 'transparent',

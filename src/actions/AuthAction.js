@@ -201,7 +201,7 @@ export const getStory = ({ storybookID, languageCode }) => {
       .then((responseJson) => {
         console.log(responseJson);
           if (responseJson === null) {
-              Alert.aler("No content Inside");
+              Alert.aler( "No content Inside");
               noStory(dispatch);
           } else {
             
@@ -309,9 +309,9 @@ const downloadStory = (dispatch, storybook) => {
   });
 };
 
-export const starFeedback = ({ userID, storybookID, rateValue }) => {
+export const starFeedback = ({ userId, storybookID, rateValue }) => {
   return dispatch => {
-    console.log(userID, storybookID, rateValue);
+    console.log(userId, storybookID, rateValue);
       fetch(
         "http://mmsrtaruc.000webhostapp.com/ReaderApp/feedback.php", 
           {
@@ -321,7 +321,7 @@ export const starFeedback = ({ userID, storybookID, rateValue }) => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-              userID: userID,
+              userId: userId,
               storybookID: storybookID,
               rateValue: rateValue
           })
@@ -335,6 +335,7 @@ export const starFeedback = ({ userID, storybookID, rateValue }) => {
               failFeedback(dispatch);
           } else {
               successFeedback(dispatch, responseJson);
+              Alert.aler("Feedback Success");
               Actions.storybook();
           }
           

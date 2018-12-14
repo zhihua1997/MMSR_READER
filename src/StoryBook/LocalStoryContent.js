@@ -3,13 +3,14 @@ import { Image, StyleSheet, Text, View, FlatList, Dimensions, TouchableNativeFee
 import Top from '../component/Top';
 import { SearchBar } from 'react-native-elements';
 import _ from 'lodash';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from "react-native-router-flux";
 import { Thumbnail, Container, Content } from 'native-base';
-import { Input } from '../tools';
+import { Confirm, Button, Header }from '../tools';
 import { getStoryContent, DownloadStoryBook } from "../actions";
 import { connect } from 'react-redux';
 import { strings } from '../localization';
-import { downloadedContent } from '../actions/DownloadAction'
+import { downloadedContent, deleteStoryBook } from '../actions/DownloadAction'
 
 /*const data = [
     { key: 'A'}, { key: 'B'}, { key: 'C'}, { key: 'D'}, { key: 'E'}, { key: 'F'}, { key: 'G'}, { key: 'H'},
@@ -40,6 +41,7 @@ class LocalStoryContent extends Component {
             storybookID: [],
             languageCode: "",
             refreshing: false,
+            showModal: false,
             /*stateData: formatData(data, numColumns),
             error: null,
             query: "",
@@ -49,6 +51,7 @@ class LocalStoryContent extends Component {
 
 
     componentDidMount() {
+        console.log("ComponentDidmount");
         AsyncStorage.getItem("download_token").then(token =>{
             const Alldata = JSON.parse(token);
             console.log(Alldata);
@@ -90,6 +93,7 @@ class LocalStoryContent extends Component {
     }
 
     onSave(storybookID, languageCode2) {
+
         const { 
             languageCode,
         } = this.state;
@@ -126,6 +130,22 @@ class LocalStoryContent extends Component {
         placeholder='Search by Truck Name...'
     />
     }
+    onLongpress(storybookID){
+        this.setState({ 
+            showModal: !this.state.showModal,
+            storybookID: storybookID,
+        })
+
+    }
+    onAccept(storybookID) {
+        console.log(storybookID, "Accept");
+        this.props.deleteStoryBook({ storybookID });
+        this.setState({ showModal: false });
+      }
+      
+      onDecline() {
+        this.setState({ showModal: false });
+      }
     
     renderItem = ({ item }) => {
         //console.log(item.coverPage);
@@ -134,14 +154,23 @@ class LocalStoryContent extends Component {
             return <View style={[styles.item, styles.itemInvisible]}/>;
         }
         return ( 
-        <TouchableOpacity onPress={()=>this.onSave(item.storybookID, item.languageCode)} style={styles.item}>
+        <View style={styles.item}>
+        <TouchableOpacity onPress={()=>this.onSave(item.storybookID, item.languageCode)} onLongPress={() => this.onLongpress(item.storybookID)} style={styles.item}>
         <Text value={this.props.storybookID}>{item.storybookID}</Text>
             <View style={styles.item}>
-                <Image style={{width: 66, height: 58}} 
+                <Image style={{width: 100, height: 90}} 
                 source={{uri:'data:image/png;base64,'+ item.media }}/>
                <Text style={styles.itemText}>{item.title}</Text>
             </View>
         </TouchableOpacity>
+         <Confirm
+         visible={this.state.showModal}
+         onAccept={()=> this.onAccept(storybookID)}
+         onDecline={this.onDecline.bind(this)}
+         >
+         Are you sure to delete this storybook?
+       </Confirm>
+       </View>
         );
     }
 
@@ -153,7 +182,8 @@ class LocalStoryContent extends Component {
 
     render(){
         return (
-            
+            <View style={{ height: "100%", width: "100%" }}>
+            <Header headerText="Downloaded StoryBook"/>}/>
             <FlatList
                  data={this.state.data}
                 style={styles.container}
@@ -164,7 +194,14 @@ class LocalStoryContent extends Component {
                 refreshing={this.state.refreshing}
                 onRefresh={this.handleRefresh}
             />
-            
+            <Confirm
+         visible={this.state.showModal}
+         onAccept={()=> this.onAccept(this.state.storybookID)}
+         onDecline={this.onDecline.bind(this)}
+        >
+         Are you sure to delete this storybook?
+       </Confirm>
+            </View>
         );
     }
 }
@@ -175,7 +212,7 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     item: {
-        backgroundColor: '#4D243D',
+        backgroundColor: '#D3D3D3',
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
@@ -196,4 +233,4 @@ const mapStateToProps = state => {
     return { downLoad };
 };
 
-export default connect(mapStateToProps, { getStoryContent, DownloadStoryBook, downloadedContent })(LocalStoryContent); 
+export default connect(mapStateToProps, { getStoryContent, DownloadStoryBook, downloadedContent, deleteStoryBook })(LocalStoryContent); 

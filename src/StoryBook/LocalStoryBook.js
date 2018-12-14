@@ -17,9 +17,11 @@ class LocalStoryBook extends Component {
     constructor(props) {
         super(props);
 
+        const language = this.props.downLoad[0].languageCode;
+        const lan = language.substring(0, 2);
         this.state = {
             loading: false,
-            storybookID: [],
+            languageCode: lan,
             data: [],
             pageNo: [],
             media: [],
@@ -35,73 +37,65 @@ class LocalStoryBook extends Component {
 
 
 
-    componentDidMount() {
-        this.data();
+    componentDidlMount() {
+        console.log("componentWillMount");
+        //console.log(this.props.downLoad[0].storybookID);
+        const languageCode = this.state.languageCode;
+        const storybookID = this.props.downLoad[0].storybookID;
+        const storybook = {
+            languageCode,
+            storybookID
+        };
+        this.props.translateContent({ storybook });
     }
+
+    /*componentWillReceiveProps(nextProps) {
+        //debugger;
+        //console.log(nextProps.downloadedStorybook[0].languageCode);
+        if (this.props.downLoad.length !== 0) {
+          if (
+            this.props.downLoad[0].languageCode ===
+            nextProps.downLoad[0].languageCode
+          ) {
+            console.log("same props, not need update");
+          } else {
+            const languageCode = this.state.languageCode;
+            const storybookID = this.props.downLoad[0].storybookID;
+            const storybook = {
+                languageCode,
+                storybookID
+            };
+            this.props.translateContent({ storybook });
+          }
+        }
+      }*/
+
 
 
     onStarRatingPress(rating) {
         this.setState({
             starCount: rating
         });
-    }
-
-    data() {
-        
-        AsyncStorage.getItem("downloadContent_token").then(token => {
-            const Alldata = JSON.parse(token);
-            console.log(Alldata);
-            const len = Alldata.length;
-            var storybookID = [];
-            var pageNo = [];
-            var media = [];
-            var content = [];
-
-            for (let i = 0; i < len; i++) {
-                storybookID = Alldata[i].storybookID;
-                pageNo = Alldata[i].pageNo;
-                media = Alldata[i].media;
-                content = Alldata[i].content;
-
-                this.state.storybookID.push(storybookID);
-                this.state.pageNo.push(pageNo);
-                this.state.media.push(media);
-                this.state.content.push(content);
-
-            }
-            this.setState({
-                data: Alldata,
-                loading: token !== null,
-
-            });
-            console.log(this.state.data);
-        });
-    }
-
-    getS = async () => {
-        try {
-            await this.data();
-        } catch (error) {
-            console.error("AsyncStorage error: " + error.message);
-        }
+      
     }
 
     closeFeedback = () => {
+        console.log(this.state.starCount);
         this.setState({
             showMe: false
         })
     }
 
     IncrementCount = () => {
-        const len = this.state.pageNo.length - 1;
+        const len = this.props.downLoad.length - 1;
         if (this.state.count < len) {
             this.setState({ count: this.state.count + 1 });
         }
         else {
-            Alert.alert("This is the last Page");
             this.setState({
                 showMe: true
             })
+            //Alert.alert("This is the last Page");
         }
     }
 
@@ -114,35 +108,20 @@ class LocalStoryBook extends Component {
         }
     }
 
-    getStoryFunction(storybookID, languageCode) {
+    getStoryFunction(storybookID, value) {
         //const { storybookID } = this.props;
         //console.log(this.props.storybookID);
         //storybookID, languageCode = this.props;
 
+        this.setState({ languageCode: value });
+        const languageCode = this.state.languageCode;
         const storybook = {
-            storybookID,
             languageCode,
+            storybookID
         };
+        this.props.translateContent({ storybook });
 
-        this.reload();
-        this.props.translateContent({ 
-            storybook
-         });
-
-       
-        console.log(storybookID, languageCode);
-    }
-
-    reload = () => {
-        this.setState({
-            storybookID: [],
-            pageNo: [],
-            media: [],
-            content: [],
-        });
-
-        //console.log(this.state.content);
-        this.componentDidMount();
+        //console.log(storybookID, languageCode);
     }
 
     readText(item) {
@@ -161,23 +140,23 @@ class LocalStoryBook extends Component {
               
                     label='Select languege: '
                     data={items}
-                    onChangeText={(value) => this.getStoryFunction(this.state.storybookID[0], value)}
+                    onChangeText={(value) => this.getStoryFunction(this.props.downLoad[0].storybookID, value)}
                     containerStyle={{ height: 50, width: 100 }}
                 />
                 <View>
                     <Image style={{ width: 100, height: 100 }}
-                        source={{ uri: 'data:image/png;base64,' + this.state.media[this.state.count] }} />
+                        source={{ uri: 'data:image/png;base64,' + this.props.downLoad[this.state.count].media }} />
                 </View>
-                <Text>{this.state.content[this.state.count]}</Text>
+                <Text>{this.props.downLoad[this.state.count].content}</Text>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Icon name="chevron-left" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.DecreaseCount} />
-                    <Text>{this.state.pageNo[this.state.count]}/{this.state.pageNo.length}</Text>
+                    <Text>{this.props.downLoad[this.state.count].pageNo}/{this.props.downLoad.length}</Text>
                     <Icon name="chevron-right" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.IncrementCount} />
                 </View>
-                <Button onPress={() => this.readText(this.state.content[this.state.count])} style={{ width: 50, height: 20 }} >
+                <Button onPress={() => this.readText(this.props.downLoad[this.state.count].content)} style={{ width: 50, height: 20 }} >
                     Speak
                 </Button>
-                <Modal visible={this.state.showMe} onRequestClose={() => console.warn("this is a close request")} >
+                <Modal visible={this.state.showMe} onRequestClose={() => console.warn("this is a close request")} transparent animationType="slide" >
                     <View style={styles.container}>
                         <StarRating
                             disabled={false}
@@ -220,4 +199,10 @@ const styles = StyleSheet.create({
     },
 })
 
-export default connect(null, { translateContent })(LocalStoryBook);
+const mapStateToProps = state => {
+    const { downLoad } = state.download;
+  
+    return { downLoad };
+};
+
+export default connect(mapStateToProps, { translateContent })(LocalStoryBook);

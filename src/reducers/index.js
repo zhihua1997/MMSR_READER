@@ -10,7 +10,7 @@ export default combineReducers({
     auth: AuthReducer,
     storybook: StoryBookReducer,
     story: StoryReducer,
-    storyContent: StoryContentReducer,
+    storycontent: StoryContentReducer,
     download: DownloadReducer,
     feedback: FeedbackReducer,
 })

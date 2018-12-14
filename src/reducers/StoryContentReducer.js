@@ -4,7 +4,7 @@ const STORY_CONTENT_STATE = {
     storybookID: '',
     languageCode: '',
     isLoading: false,
-    storyContent: [],
+    //storyContent: [],
 };
 
 export default (state = STORY_CONTENT_STATE, action) => {

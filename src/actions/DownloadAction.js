@@ -164,7 +164,7 @@ export const downloadedList = () => {
           }
         );
       });
-      Actions.localstorycontent({ key:"reload" });
+      Actions.localstorycontent();
     };
   };
 
@@ -185,10 +185,11 @@ export const downloadedList = () => {
 
  
 
-  const dlDefaultLanguage = (storybook) => {
+  const dlDefaultLanguage = (dispatch, storybook) => {
         let dl = [];
-        console.log(storybook.storybookID, storybook.languageCode)
+        console.log(storybook.storybookID, storybook.languageCode, "Default Language")
           db.transaction(tx => {
+            //console.log(storybook.storybookID, storybook.languageCode, "Default Language")
             tx.executeSql(
               "SELECT * FROM storybook WHERE storybookID = ? AND languageCode = ?;",
               [
@@ -203,15 +204,16 @@ export const downloadedList = () => {
                 console.log(dl[i]);
               }
               console.log(dl);
-              //downloadContent(dispatch, dl);
+              downloadContent(dispatch, dl);
               saveUser("downloadContent_token", JSON.stringify(dl));
               }
             );
           });
-        Actions.localstorybook({ key:"reload" });
-  }
+        Actions.localstorybook();
+        
+  };
 
-  const dlNotDefaultLanguage = (storybook) => {
+  const dlNotDefaultLanguage = (dispatch, storybook) => {
         let dl = [];
         const lan = storybook.languageCode2;
         let lan1 = lan.substring(0, 2);
@@ -231,13 +233,20 @@ export const downloadedList = () => {
                 console.log(dl[i]);
               }
               console.log(dl);
-              //downloadContent(dispatch, dl);
+              downloadContent(dispatch, dl);
               saveUser("downloadContent_token", JSON.stringify(dl));
               }
             );
           });
           Actions.localstorybook({ key:"reload" });
   }
+
+  const downloadContent = (dispatch, storybook) => {
+    dispatch({
+      type: DOWNLOAD_CONTENT,
+      payload: storybook
+    });
+  };
 
   export const downloadedContent = ({ storybook }) => {
     return dispatch => {
@@ -257,10 +266,10 @@ export const downloadedList = () => {
           if (typeof results.rows.item(0) == "undefined") {
               //console.log("hi");
               console.log("hey");
-              dlNotDefaultLanguage(storybook);
+              dlNotDefaultLanguage(dispatch, storybook);
           }
           else {
-            dlDefaultLanguage(storybook);
+            dlDefaultLanguage(dispatch, storybook);
           }
           //saveUser("download_token", JSON.stringify(dl));
           }
@@ -270,7 +279,7 @@ export const downloadedList = () => {
     };
   };
 
-  const translateSuccess = (storybook) => {
+  const translateSuccess = (dispatch, storybook) => {
     let dl = [];
     //console.log(storybook.storybookID, storybook.languageCode2)
       db.transaction(tx => {
@@ -287,8 +296,8 @@ export const downloadedList = () => {
             dl[i] = row;
             console.log(dl[i]);
           }
-          console.log(dl);
-          //downloadContent(dispatch, dl);
+          //console.log(dl);
+          downloadContent(dispatch, dl);
           saveUser("downloadContent_token", JSON.stringify(dl));
           }
         );
@@ -312,17 +321,37 @@ export const downloadedList = () => {
           (tx, results) => {
               
           if (typeof results.rows.item(0) == "undefined") {
+            //Alert.alert("Not such Language");
               console.log("Not such Language");
               //Alert.alert("Not such Language");
           }
           else {
-            translateSuccess(storybook);
+            translateSuccess(dispatch, storybook);
           }
           //saveUser("download_token", JSON.stringify(dl));
           }
         );
       });
-      //Actions.localstorycontent({ key:"reload" });
+        
     };
   };
+
+  export const deleteStoryBook = ({ storybookID }) => {
+    return dispatch => {
+      db.transaction(tx => {
+        tx.executeSql("DELETE FROM storybooklibrary WHERE storybookID = ?;", [
+          storybookID
+        ]);
+      });
+      db.transaction(tx => {
+        tx.executeSql("DELETE FROM storybook WHERE storybookID = ?;", [
+          storybookID
+        ]);
+      });  
+      downloadedList();
+      Actions.downloaded();
+    };
+  }
+
+
 

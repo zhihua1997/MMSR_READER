@@ -21,6 +21,7 @@ import Feedback from './StoryBook/Feedback';
 import LocalStoryContent from './StoryBook/LocalStoryContent'
 import LocalStoryBook from './StoryBook/LocalStoryBook';
 
+
 const MenuIcon = () => {
 	return (
 		<Icon name="navicon" size={30} />
@@ -89,8 +90,8 @@ const RouterComponent = ({ initial, props }) => {
 					<Scene
 						key="localstorycontent"
 						component={LocalStoryContent}
-						//getTitle={ props.title }
 					/>
+					
 					<Scene
 						key="localstorybook"
 						component={LocalStoryBook}

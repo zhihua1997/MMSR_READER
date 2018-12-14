@@ -6,3 +6,4 @@ export * from './Input';
 export * from './Panel';
 export * from './Splash';
 export * from './Tab';
+export * from './Confirm';
