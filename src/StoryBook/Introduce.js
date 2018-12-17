@@ -151,25 +151,28 @@ class Introduce extends Component {
                     <Thumbnail large source={require('../Images/profile1.jpg')} />
                 </View>
                 <View>
-                    <Text>{this.state.storybookID}</Text>
+                    <Text>{this.state.author}</Text>
                 </View>
-                <View style={styles.viewBox}>
+                <View style={styles.viewDescription}>
                 <Text>{this.state.description}</Text>
                 </View>
                 <View style={styles.viewBox}>
-                <Text>{this.state.languageCode}</Text>
+                <Text>Language: {this.state.languageCode}</Text>
                 </View>
                 <View style={styles.viewBox}>
-                <Text>{this.state.age}</Text>
+                <Text>Age: {this.state.age}</Text>
                
                 </View>
+                <View style={styles.buttonSize}>
                 <Button onPress={()=> this.getStoryFunction(this.state.storybookID[0], this.state.languageCode[0])}>
                     Read
                 </Button>
+                </View>
+                <View style={styles.buttonSize}>
                 <Button onPress={this.onDownload.bind(this)}>
                     Download
                 </Button>
-               
+                </View>
             </View>
         );
     }
@@ -186,13 +189,29 @@ const styles = {
        // backgroundColor: '#F8F8F8',
     },
     viewBox: {
+        //borderWidth: 1,
+        borderColor: '#000',
+        borderStyle: 'solid',
+        //backgroundColor: '#F8F8F8',
+        width: 200, 
+        height: 60,
+        alignItems: "center",
+        marginTop: 5,
+    },
+    viewDescription: {
+        borderWidth: 1,
         borderColor: '#000',
         borderStyle: 'solid',
         backgroundColor: '#F8F8F8',
-        width: 80, 
-        height: 60,
-        alignItems: 'center',
-        marginTop: 15,
+        width: 200, 
+        height: 80,
+        alignItems: "center",
+        marginTop: 5,
+    },
+    buttonSize: {
+        marginTop: 10,
+        width: 220,
+        height: 70,
     }
 }
 const mapStateToProps = state => {

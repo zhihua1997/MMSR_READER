@@ -335,7 +335,7 @@ export const starFeedback = ({ userId, storybookID, rateValue }) => {
               failFeedback(dispatch);
           } else {
               successFeedback(dispatch, responseJson);
-              Alert.aler("Feedback Success");
+              Alert.alert("Feedback Success");
               Actions.storybook();
           }
           

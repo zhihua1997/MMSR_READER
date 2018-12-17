@@ -74,6 +74,7 @@ const RouterComponent = ({ initial, props }) => {
 					<Scene
 						key="introduce"
 						component={Introduce}
+						title = "Storybook Description"
 						//getTitle={ props.title }
 					/>
 

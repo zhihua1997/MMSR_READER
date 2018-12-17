@@ -11,6 +11,7 @@ import { translateStory, starFeedback } from '../actions';
 import Tts from "react-native-tts";
 import { Dropdown } from 'react-native-material-dropdown';
 
+
 const items = [{ value: "EN" }, { value: "BM" }, { value: "ZH" }];
 
 class StoryBook extends Component {
@@ -45,18 +46,18 @@ class StoryBook extends Component {
         //debugger;
         //console.log(nextProps.downloadedStorybook[0].languageCode);
         if (this.props.storyBook.length !== 0) {
-          if (
-            this.props.storyBook[0].languageCode ===
-            nextProps.storyBook[0].languageCode
-          ) {
-            console.log("same props, not need update");
-          } else {
-            const languageCode = this.state.languageCode;
-            const storybookID = this.props.storyBook[0].storybookID;
-            this.props.translateStory({ storybookID, languageCode });
-          }
+            if (
+                this.props.storyBook[0].languageCode ===
+                nextProps.storyBook[0].languageCode
+            ) {
+                console.log("same props, not need update");
+            } else {
+                const languageCode = this.state.languageCode;
+                const storybookID = this.props.storyBook[0].storybookID;
+                this.props.translateStory({ storybookID, languageCode });
+            }
         }
-      }
+    }
 
 
     onStarRatingPress(rating) {
@@ -67,7 +68,7 @@ class StoryBook extends Component {
 
 
     closeFeedback = () => {
-        
+
         let rateValue = this.state.starCount.toString();
         let userId = this.props.user.userId.toString();
         let storybookID = this.props.storyBook[0].storybookID.toString();
@@ -77,6 +78,12 @@ class StoryBook extends Component {
         console.log(rateValue, userId, storybookID);
         this.props.starFeedback({ userId, storybookID, rateValue });
 
+    }
+
+    cancelFeedback = () => {
+        this.setState({
+            showMe: false
+        });
     }
 
     IncrementCount = () => {
@@ -138,34 +145,41 @@ class StoryBook extends Component {
         return (
             <View style={styles.container}>
                 <Dropdown
-              
+
                     label='Select languege: '
                     data={items}
                     onChangeText={(value) => this.getStoryFunction(this.props.storyBook[0].storybookID, value)}
-                    containerStyle={{ height: 50, width: 100 }}
+                    containerStyle={{ height: 50, width: 200, marginBottom: 10 }}
                 />
                 <View>
-                    <Image style={{ width: 100, height: 100 }}
+                    <Image style={{ width: 350, height: 300 }}
                         source={{ uri: 'data:image/png;base64,' + this.props.storyBook[this.state.count].media }} />
                 </View>
-                <Text>{this.props.storyBook[this.state.count].content}</Text>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ fontSize: 20 }}>{this.props.storyBook[this.state.count].content}</Text>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                     <Icon name="chevron-left" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.DecreaseCount} />
-                    <Text>{this.props.storyBook[this.state.count].pageNo}/{this.props.storyBook.length}</Text>
+                    <Text style={{ fontSize: 15 }}>{this.props.storyBook[this.state.count].pageNo}/{this.props.storyBook.length}</Text>
                     <Icon name="chevron-right" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.IncrementCount} />
                 </View>
-                <Button onPress={() => this.readText(this.props.storyBook[this.state.count].content)} style={{ width: 50, height: 20 }} >
-                    Speak
+                <View style={styles.buttonSize}>
+                    <Button onPress={() => this.readText(this.props.storyBook[this.state.count].content)} style={{ width: 50, height: 20 }} >
+                        Speak
                 </Button>
-                <Modal visible={this.state.showMe} onRequestClose={() => console.warn("this is a close request")} >
-                    <View style={styles.container}>
-                        <StarRating
-                            disabled={false}
-                            maxStars={5}
-                            rating={this.state.starCount}
-                            selectedStar={(rating) => this.onStarRatingPress(rating)}
-                        />
-                        <Button style={styles.feedbackBtn} onPress={this.closeFeedback}>Okay</Button>
+                </View>
+                <Modal visible={this.state.showMe} transparent onRequestClose={() => console.warn("this is a close request")}>
+                    <View style={styles.feedback}>
+                        <View style={{ marginTop: 200 }}>
+                            <StarRating
+                                disabled={false}
+                                maxStars={5}
+                                rating={this.state.starCount}
+                                selectedStar={(rating) => this.onStarRatingPress(rating)}
+                            />
+                        </View>
+                        <View style={styles.feedbackbtn}>
+                            <Button style={styles.feedbackBtn} onPress={this.closeFeedback}>Submit</Button>
+                            <Button style={styles.feedbackBtn} onPress={this.cancelFeedback}>Cancel</Button>
+                        </View>
                     </View>
                 </Modal>
             </View>
@@ -181,6 +195,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
+    feedback: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(52, 52, 52, 0.8)',
+    },
+    feedbackbtn: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 360,
+        width: 220,
+        height: 30,
+    },
     item: {
         backgroundColor: '#4D243D',
         alignItems: 'center',
@@ -193,6 +221,12 @@ const styles = StyleSheet.create({
     },
     itemInvisible: {
         backgroundColor: 'transparent',
+    },
+    buttonSize: {
+        //backgroundColor: '#D3D3D3',
+        marginBottom: 60,
+        width: 220,
+        height: 70,
     },
     feedbackBtn: {
         width: 100,

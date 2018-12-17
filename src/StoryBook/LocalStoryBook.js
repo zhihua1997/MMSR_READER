@@ -85,6 +85,11 @@ class LocalStoryBook extends Component {
             showMe: false
         })
     }
+    cancelFeedback = () => {
+        this.setState({
+            showMe: false
+        });
+    }
 
     IncrementCount = () => {
         const len = this.props.downLoad.length - 1;
@@ -141,30 +146,37 @@ class LocalStoryBook extends Component {
                     label='Select languege: '
                     data={items}
                     onChangeText={(value) => this.getStoryFunction(this.props.downLoad[0].storybookID, value)}
-                    containerStyle={{ height: 50, width: 100 }}
+                    containerStyle={{ height: 50, width: 200, marginBottom: 10 }}
                 />
                 <View>
-                    <Image style={{ width: 100, height: 100 }}
+                    <Image style={{ width: 350, height: 300 }}
                         source={{ uri: 'data:image/png;base64,' + this.props.downLoad[this.state.count].media }} />
                 </View>
-                <Text>{this.props.downLoad[this.state.count].content}</Text>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{fontSize: 20  }}>{this.props.downLoad[this.state.count].content}</Text>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                     <Icon name="chevron-left" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.DecreaseCount} />
-                    <Text>{this.props.downLoad[this.state.count].pageNo}/{this.props.downLoad.length}</Text>
+                    <Text style={{fontSize: 15  }}>{this.props.downLoad[this.state.count].pageNo}/{this.props.downLoad.length}</Text>
                     <Icon name="chevron-right" size={30} color="#000" style={{ marginRight: 10 }} onPress={this.IncrementCount} />
                 </View>
+                <View style={styles.buttonSize}>
                 <Button onPress={() => this.readText(this.props.downLoad[this.state.count].content)} style={{ width: 50, height: 20 }} >
                     Speak
                 </Button>
-                <Modal visible={this.state.showMe} onRequestClose={() => console.warn("this is a close request")} transparent animationType="slide" >
-                    <View style={styles.container}>
+                </View>
+                <Modal visible={this.state.showMe} transparent onRequestClose={() => console.warn("this is a close request")} >
+                    <View style={styles.feedback}>
+                    <View style={{ marginTop: 200 }}>
                         <StarRating
                             disabled={false}
                             maxStars={5}
                             rating={this.state.starCount}
                             selectedStar={(rating) => this.onStarRatingPress(rating)}
                         />
-                        <Button style={styles.feedbackBtn} onPress={this.closeFeedback}>Okay</Button>
+                        </View>
+                         <View style={styles.feedbackbtn}>
+                            <Button style={styles.feedbackBtn} onPress={this.closeFeedback}>Submit</Button>
+                            <Button style={styles.feedbackBtn} onPress={this.cancelFeedback}>Cancel</Button>
+                        </View>
                     </View>
                 </Modal>
             </View>
@@ -174,11 +186,26 @@ class LocalStoryBook extends Component {
 }
 
 const styles = StyleSheet.create({
+    
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
+    },
+    feedback: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(52, 52, 52, 0.8)',
+    },
+    feedbackbtn: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 360,
+        width: 220,
+        height: 30,
     },
     item: {
         backgroundColor: '#4D243D',
@@ -186,6 +213,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex: 1,
         margin: 1,
+    },
+    buttonSize: {
+        //backgroundColor: '#D3D3D3',
+        marginBottom: 60,
+        width: 220,
+        height: 70,
     },
     itemText: {
         color: '#FFF',

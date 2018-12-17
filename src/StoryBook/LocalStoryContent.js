@@ -156,7 +156,6 @@ class LocalStoryContent extends Component {
         return ( 
         <View style={styles.item}>
         <TouchableOpacity onPress={()=>this.onSave(item.storybookID, item.languageCode)} onLongPress={() => this.onLongpress(item.storybookID)} style={styles.item}>
-        <Text value={this.props.storybookID}>{item.storybookID}</Text>
             <View style={styles.item}>
                 <Image style={{width: 100, height: 90}} 
                 source={{uri:'data:image/png;base64,'+ item.media }}/>
