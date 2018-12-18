@@ -150,7 +150,7 @@ class ContentStory extends Component {
 
     render(){
         return (
-            
+        
             <FlatList
                  data={this.state.data}
                 style= {styles.container}
