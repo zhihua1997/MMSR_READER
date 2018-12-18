@@ -9,13 +9,30 @@ import { Input } from '../tools';
 import { getStoryContent, DownloadStoryBook } from "../actions";
 import { connect } from 'react-redux';
 import { strings } from '../localization'
+import StarRating from 'react-native-star-rating';
 
 /*const data = [
     { key: 'A'}, { key: 'B'}, { key: 'C'}, { key: 'D'}, { key: 'E'}, { key: 'F'}, { key: 'G'}, { key: 'H'},
     { key: 'I'}, { key: 'J'}
 ];*/
 
-const formatData = ( data, numColumns) => {
+const formatData = ( data, numColumns, rateValue ) => {
+    let count = 0;
+    for (let i = 0; i < data.length; i++){
+        for (let j = 0; j < rateValue.length; j++){
+            //console.log("for loop", data[i].storybookID, rateValue[j].storybookID)
+            if (data[i].storybookID == rateValue[j].storybookID){
+                data[i].star = rateValue[j].average;
+                count++;
+            }
+            else if (count === 0) {
+                data[i].star = 0;
+            }
+            
+        }
+    }
+
+    console.log("formatDate", data)
     const numberOfFullRow = Math.floor( data.length / numColumns);
 
     let numberOfElementLastRow = data.length - (numberOfFullRow * numColumns);
@@ -23,6 +40,7 @@ const formatData = ( data, numColumns) => {
         data.push({ key:'blank-$'+ numberOfElementLastRow, empty: true });
         numberOfElementLastRow = numberOfElementLastRow + 1;
     }
+    
     
     return data;
 };
@@ -37,6 +55,7 @@ class ContentStory extends Component {
             loading: false,
             data: [],
             title:[],
+            star: [],
             /*stateData: formatData(data, numColumns),
             error: null,
             query: "",
@@ -48,8 +67,9 @@ class ContentStory extends Component {
     componentDidMount() {
         AsyncStorage.getItem("storybook_token").then(token =>{
             const Alldata = JSON.parse(token);
+            const rateValue = this.props.Rate;
             //console.log(strings.default);
-            console.log(Alldata);
+            console.log(Alldata, rateValue);
             const len = Alldata.length; 
             var result = [];
             for (let i=0; i < len; i++) {
@@ -58,7 +78,7 @@ class ContentStory extends Component {
               this.state.title.push(result);
             }
             this.setState({
-                data: formatData(Alldata, numColumns),
+                data: formatData(Alldata, numColumns, rateValue),
                 loading: token !== null,
             });
             //console.log(this.state.data);
@@ -106,9 +126,17 @@ class ContentStory extends Component {
         return ( 
         <TouchableOpacity onPress={()=>this.getContentFunction(item.storybookID, strings.default)} style={styles.item}>
             <View style={styles.item}>
-                <Image style={{width: 100, height: 90}} 
+                <Image style={{width: 95, height: 85}} 
                 source={{uri:'data:image/png;base64,'+ item.coverPage }}/>
                <Text style={styles.itemText}>{item.title}</Text>
+               <StarRating
+                                disabled={true}
+                                maxStars={5}
+                                rating={item.star}
+                                //containerStyle={{width: 20, height:5, }}
+                                starSize={10}
+                                fullStarColor={"#FFFF00"}
+                        />
             </View>
         </TouchableOpacity>
         );
@@ -157,4 +185,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(null, { getStoryContent, DownloadStoryBook })(ContentStory); 
+const mapStateToProps = state => {
+    const { Rate } = state.feedback;
+    
+    return { Rate };
+};
+
+export default connect(mapStateToProps, { getStoryContent, DownloadStoryBook })(ContentStory);

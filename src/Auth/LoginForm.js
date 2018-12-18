@@ -16,7 +16,7 @@ import {
   Label,
 } from "native-base";
 import { Actions } from "react-native-router-flux";
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser, getStoryBook, getStarRating } from '../actions';
 import { connect } from 'react-redux';
 import { strings } from '../localization'
 
@@ -37,7 +37,8 @@ class LoginForm extends Component {
     console.log(this.props.password);
 
     this.props.loginUser({ email, password });
-
+    this.props.getStoryBook();
+    this.props.getStarRating();
    
   }
 
@@ -108,6 +109,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    emailChanged, passwordChanged, loginUser
+    emailChanged, passwordChanged, loginUser, getStoryBook, getStarRating
   }
 )(LoginForm);

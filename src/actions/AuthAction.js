@@ -91,7 +91,6 @@ const saveUser = async (item, selectedValue) => {
 
 //StoryBook Action
 
-
 export const getStoryBook = () => {
   return dispatch => {
       fetch("http://mmsrtaruc.000webhostapp.com/get_storybook_translate_list.php")
@@ -334,7 +333,7 @@ export const starFeedback = ({ userId, storybookID, rateValue }) => {
               Alert.aler("Feedback Fail");
               failFeedback(dispatch);
           } else {
-              successFeedback(dispatch, responseJson);
+              //successFeedback(dispatch, responseJson);
               Alert.alert("Feedback Success");
               Actions.storybook();
           }
@@ -345,6 +344,29 @@ export const starFeedback = ({ userId, storybookID, rateValue }) => {
       });
   }
 }
+
+export const getStarRating = () => {
+  console.log("star rating")
+  return dispatch => {
+      fetch("http://mmsrtaruc.000webhostapp.com/ReaderApp/starRating.php")
+      .then(response => response.json())
+      .then((responseJson) => {
+        console.log(responseJson);
+          if (responseJson === null){
+              Alert.aler("No data Inside");
+              failFeedback(dispatch);
+          } else {
+               successFeedback(dispatch, responseJson);
+               //saveUser("storybook_token", JSON.stringify(responseJson));
+               Actions.downloaded()
+          }
+          
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+  };
+};
 
 
 const failFeedback = dispatch => {

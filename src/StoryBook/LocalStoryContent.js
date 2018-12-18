@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').width / numColumns,
     },
     itemText: {
-        color: '#FFF',
+        color: '#000',
     },
     itemInvisible: {
         backgroundColor: 'transparent',

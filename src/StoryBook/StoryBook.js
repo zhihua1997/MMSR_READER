@@ -166,14 +166,16 @@ class StoryBook extends Component {
                         Speak
                 </Button>
                 </View>
-                <Modal visible={this.state.showMe} transparent onRequestClose={() => console.warn("this is a close request")}>
+                <Modal visible={this.state.showMe} transparent onRequestClose={() => console.warn("this is a close request")} animationType="slide">
                     <View style={styles.feedback}>
                         <View style={{ marginTop: 200 }}>
                             <StarRating
                                 disabled={false}
                                 maxStars={5}
                                 rating={this.state.starCount}
+                                fullStarColor={"#FFFF00"}
                                 selectedStar={(rating) => this.onStarRatingPress(rating)}
+
                             />
                         </View>
                         <View style={styles.feedbackbtn}>

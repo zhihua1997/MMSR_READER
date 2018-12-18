@@ -13,7 +13,7 @@ export default (state = FEEDBACK_STATE, action) => {
         case FEEDBACK_FAIL:
             return { ...state, isLoading: false };
         case FEEDBACK_SUCCESS:
-            return { ...state, rate: action.payload };
+            return { ...state, Rate: action.payload };
         default:
             return state;
 
