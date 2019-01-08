@@ -24,6 +24,29 @@ export let strings = new LocalizedStrings({
    languageProficient: "Your Proficient Language:",
    chooseLanguage: "Choose Your Language",
    register: "Register",
+
+   library: "Library",
+   downloaded: "Downloaded",
+   profile: "Profile",
+   signout: "Sign Out",
+
+   read: "Read",
+   download: "Download",
+
+   submit: "Submit",
+   cancel: "Cancel",
+   feedback: "Give Us Your Feedback",
+   
+   selectLanguage: "Select Language:",
+   selectAge: "Select Age Group:",
+
+   speak: "Speak",
+   feedBack: "Feedback",
+
+   toddler: "Toddler",
+   preschooler: "Preschooler",
+   gradeschooler: "Gradeschooler",
+   secondaryschooler: "Secondaryschooler",
  },
  cn:{
    default: "ZH",
@@ -43,6 +66,29 @@ export let strings = new LocalizedStrings({
    languageProficient: "你熟练的语言:",
    chooseLanguage: "选择你的语言",
    register: "注册",
+
+   library: "图书馆",
+   downloaded: "已下载",
+   profile: "个人资料",
+   signout: "退出",
+
+   read: "读",
+   download: "下载",
+
+   submit: "提交",
+   cancel: "取消",
+   feedback: "给我们你的反馈",
+   
+   selectLanguage: "选择语言：",
+   selectAge: "选择年龄组：",
+
+   speak: "说",
+   feedBack: "反馈",
+
+   toddler: "蹒跚学步",
+   preschooler: "学龄前儿童",
+   gradeschooler: "小学生",
+   secondaryschooler: "中学生",
  },
  bm: {
     default: "BM",
@@ -62,6 +108,29 @@ export let strings = new LocalizedStrings({
    languageProficient: "Bahasa Anda yang Profesional:",
    chooseLanguage: "Pilih Bahasa Anda",
    register: "Daftar",
+
+   library: "Perpustakaan",
+   downloaded: "Dikemaskini",
+   profile: "Profil",
+   signout: "Daftar Keluar",
+
+   read: "Baca",
+   download: "Muat Turun",
+
+   submit: "Hantar",
+   cancel: "Batal",
+   feedback: "Berikan Kami Maklum Balas Anda",
+   
+   selectLanguage: "Select Language:",
+   selectAge: "Pilih Kumpulan Umur:",
+
+   speak: "Bercakap",
+   feedBack: "Maklum Balas",
+
+   toddler: "Anak kecil",
+   preschooler: "Anak prasekolah",
+   gradeschooler: "Sekolah Gred",
+   secondaryschooler: "Sekolah Penengah",
  },
 
  tm: {
@@ -82,6 +151,30 @@ export let strings = new LocalizedStrings({
   languageProficient: "உங்களுடைய திறமையான மொழி:",
   chooseLanguage: "உங்கள் மொழியை தேர்வு செய்க",
   register: "பதிவு",
+
+  library: "நூலகம்",
+   downloaded: "பதிவிறக்கம்",
+   profile: "சுயவிவர",
+   signout: "வெளியேறு",
+
+   read: "படிக்கவும்",
+   download: "பதிவிறக்க",
+
+   submit: "சமர்ப்பி",
+   cancel: "ரத்துசெய்",
+   feedback: "எங்களுக்கு உங்கள் கருத்துக்களை கொடுங்கள்",
+   
+   selectLanguage: "மொழி தேர்ந்தெடு:",
+   selectAge: "வயது குழுவைத் தேர்ந்தெடுக்கவும்:",
+
+
+   speak: "பேசு",
+   feedBack: "கருத்து",
+
+   toddler: "Toddler",
+   preschooler: "Preschooler",
+   gradeschooler: "Gradeschooler",
+   secondaryschooler: "Secondaryschooler",
  }
 
 });

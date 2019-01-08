@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage, AppRegistry, Image, Animated, Alert, Modal } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, AsyncStorage, AppRegistry, Image, Animated, Alert, Modal, ScrollView } from 'react-native';
 import { Item, Picker } from 'native-base';
 import { Button } from '../tools';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -10,9 +10,10 @@ import { translateStory, starFeedback } from '../actions';
 //import Tts from 'react-native-tts';
 import Tts from "react-native-tts";
 import { Dropdown } from 'react-native-material-dropdown';
+import { strings } from '../localization'
 
 
-const items = [{ value: "EN" }, { value: "BM" }, { value: "ZH" }];
+const items = [{ value: "EN", label: "English"}, { value: "BM", label: "Bahasa Malayu" }, { value: "ZH", label: "Chinese" }];
 
 class StoryBook extends Component {
     constructor(props) {
@@ -146,7 +147,7 @@ class StoryBook extends Component {
             <View style={styles.container}>
                 <Dropdown
 
-                    label='Select languege: '
+                    label={strings.selectLanguage}
                     data={items}
                     onChangeText={(value) => this.getStoryFunction(this.props.storyBook[0].storybookID, value)}
                     containerStyle={{ height: 50, width: 200, marginBottom: 10 }}
@@ -163,12 +164,17 @@ class StoryBook extends Component {
                 </View>
                 <View style={styles.buttonSize}>
                     <Button onPress={() => this.readText(this.props.storyBook[this.state.count].content)} style={{ width: 50, height: 20 }} >
-                        Speak
+                        {strings.speak}
+                </Button>
+                <Button onPress={() => this.setState({ showMe: true })} style={{ width: 50, height: 20 }} >
+                        {strings.feedBack}
                 </Button>
                 </View>
+                
                 <Modal visible={this.state.showMe} transparent onRequestClose={() => console.warn("this is a close request")} animationType="slide">
                     <View style={styles.feedback}>
                         <View style={{ marginTop: 200 }}>
+                        <Text style={{ fontSize: 20, color: "white"}}>{strings.feedback}</Text>
                             <StarRating
                                 disabled={false}
                                 maxStars={5}
@@ -179,8 +185,8 @@ class StoryBook extends Component {
                             />
                         </View>
                         <View style={styles.feedbackbtn}>
-                            <Button style={styles.feedbackBtn} onPress={this.closeFeedback}>Submit</Button>
-                            <Button style={styles.feedbackBtn} onPress={this.cancelFeedback}>Cancel</Button>
+                            <Button style={styles.feedbackBtn} onPress={this.closeFeedback}>{strings.submit}</Button>
+                            <Button style={styles.feedbackBtn} onPress={this.cancelFeedback}>{strings.cancel}</Button>
                         </View>
                     </View>
                 </Modal>
@@ -228,7 +234,7 @@ const styles = StyleSheet.create({
         //backgroundColor: '#D3D3D3',
         marginBottom: 60,
         width: 220,
-        height: 70,
+        height: 110,
     },
     feedbackBtn: {
         width: 100,

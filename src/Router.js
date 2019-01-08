@@ -81,6 +81,7 @@ const RouterComponent = ({ initial, props }) => {
 					<Scene
 						key="storybook"
 						component={StoryBook}
+						title="Storybook"
 						//getTitle={ props.title }
 					/>
 					<Scene
@@ -96,6 +97,7 @@ const RouterComponent = ({ initial, props }) => {
 					<Scene
 						key="localstorybook"
 						component={LocalStoryBook}
+						title="Storybook"
 						//getTitle={ props.title }
 					/>
 					<Scene 

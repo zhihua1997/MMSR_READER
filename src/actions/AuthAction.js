@@ -1,7 +1,7 @@
 import { Alert, Keyboard, AsyncStorage } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { EMAIL_CHANGE, PASSWORD_CHANGE, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, NO_STORYBOOK, SHOW_STORYBOOK,
-  GET_STORYCONTENT, NO_STORYCONTENT, NO_STORY, GET_STORY, FEEDBACK_FAIL, FEEDBACK_SUCCESS, DOWNLOAD_STORY } from './types';
+  GET_STORYCONTENT, NO_STORYCONTENT, NO_STORY, GET_STORY, FEEDBACK_FAIL, FEEDBACK_SUCCESS, DOWNLOAD_STORY, SET_FORGETPASSWORD_TO_FALSE, SET_FORGETPASSWORD_TO_TRUE } from './types';
 
 export const emailChanged = (text) => {
   return {
@@ -16,6 +16,19 @@ export const passwordChanged = (text) => {
     payload: text
   };
 };
+
+export const setForgetPasswordLoadToTrue = () => {
+  return {
+    type: SET_FORGETPASSWORD_TO_TRUE
+  };
+};
+
+export const setForgetPasswordLoadToFalse = () => {
+  return {
+    type: SET_FORGETPASSWORD_TO_FALSE
+  };
+};
+
 
 export const loginUser = ({ email, password }) => {
   return dispatch => {
@@ -380,4 +393,45 @@ const successFeedback = (dispatch, rate) => {
       type: FEEDBACK_SUCCESS,
       payload: rate
   });
+};
+
+export const forgetPassword = ({ email }) => {
+  return dispatch => {
+    // debugger;
+    console.log(email);
+    fetch(
+      "https://mmsrtaruc.000webhostapp.com/Reader_forgetPassword.php",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email
+        })
+      }
+    )
+      .then(response => {
+        //debugger;
+        console.log(response);
+        response.json();
+      })
+      .then(responseJson => {
+        //debugger;
+        //setForgetPasswordLoadToFalse();
+        console.log(responseJson);
+
+        if (responseJson === "Unable to retrieve password") {
+          Alert.alert("The Email enter is not valid");
+        } else if (
+          responseJson === "Please check your email for your password"
+        ) {
+          Alert.alert("Email Sent, Please Check");
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 };

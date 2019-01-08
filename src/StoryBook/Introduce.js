@@ -5,6 +5,7 @@ import { Button } from '../tools';
 import { connect } from 'react-redux';
 import { getStory } from '../actions';
 import { downloadStorybook, createStorybook } from '../actions/DownloadAction';
+import { strings } from '../localization'
 
 class Introduce extends Component {
     constructor(props){
@@ -165,12 +166,12 @@ class Introduce extends Component {
                 </View>
                 <View style={styles.buttonSize}>
                 <Button onPress={()=> this.getStoryFunction(this.state.storybookID[0], this.state.languageCode[0])}>
-                    Read
+                    {strings.read}
                 </Button>
                 </View>
                 <View style={styles.buttonSize}>
                 <Button onPress={this.onDownload.bind(this)}>
-                    Download
+                    {strings.download}
                 </Button>
                 </View>
             </View>

@@ -5,7 +5,7 @@ import { Content, List, ListItem, Thumbnail } from 'native-base';
 import { connect } from 'react-redux';
 import { logoutUser, getStoryBook, getStarRating  } from '../actions/AuthAction';
 import { downloadedList  } from '../actions/DownloadAction';
-
+import { strings } from '../localization'
 
 
 class menu extends Component {
@@ -20,14 +20,18 @@ class menu extends Component {
     }
 
     showStorybookFunction() {
-        this.props.getStoryBook();
+        //this.props.getStoryBook();
         this.props.getStarRating();
     }
 
     downloadListFunction() {
-        this.props.downloadedList()
+        this.props.downloadedList();
     }
 
+    signoutUser() {
+        this.props.logoutUser();
+      }
+    
 
     componentDidMount() {
         AsyncStorage.getItem("id_token").then(token =>{
@@ -50,22 +54,22 @@ class menu extends Component {
                     <Content>
                         <List>
                             <ListItem onPress={this.showStorybookFunction.bind(this)}>
-                                <Text>Library</Text>
+                                <Text>{strings.library}</Text>
                             </ListItem>
                         </List>
                         <List>
                             <ListItem onPress={this.downloadListFunction.bind(this)}>
-                                <Text>Downloaded</Text>
+                                <Text>{strings.downloaded}</Text>
                             </ListItem>
                         </List>
                         <List>
                             <ListItem onPress={()=> Actions.profile()}>
-                                <Text>Profile</Text>
+                                <Text>{strings.profile}</Text>
                             </ListItem>
                         </List>
                         <List>
-                            <ListItem onPress={()=> Actions.feedback()}>
-                                <Text>Try</Text>
+                            <ListItem onPress={this.signoutUser.bind(this)}>
+                                <Text>{strings.signout}</Text>
                             </ListItem>
                         </List>
                     </Content>
@@ -75,4 +79,4 @@ class menu extends Component {
     }
 }
 
-export default connect(null, { getStoryBook, downloadedList, getStarRating  })(menu);
+export default connect(null, { getStoryBook, downloadedList, getStarRating, logoutUser  })(menu);

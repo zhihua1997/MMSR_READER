@@ -10,8 +10,9 @@ import { translateContent } from '../actions/DownloadAction';
 //import Tts from 'react-native-tts';
 import Tts from "react-native-tts";
 import { Dropdown } from 'react-native-material-dropdown';
+import { strings } from '../localization'
 
-const items = [{ value: "EN" }, { value: "BM" }, { value: "ZH" }];
+const items = [{ value: "EN", label: "English" }, { value: "BM", label: "Bahasa Melayu" }, { value: "ZH", label: "Chinese" }];
 
 class LocalStoryBook extends Component {
     constructor(props) {
@@ -143,7 +144,7 @@ class LocalStoryBook extends Component {
             <View style={styles.container}>
                 <Dropdown
               
-                    label='Select languege: '
+                    label={strings.selectLanguage}
                     data={items}
                     onChangeText={(value) => this.getStoryFunction(this.props.downLoad[0].storybookID, value)}
                     containerStyle={{ height: 50, width: 200, marginBottom: 10 }}
@@ -160,12 +161,16 @@ class LocalStoryBook extends Component {
                 </View>
                 <View style={styles.buttonSize}>
                 <Button onPress={() => this.readText(this.props.downLoad[this.state.count].content)} style={{ width: 50, height: 20 }} >
-                    Speak
+                    {strings.speak}
+                </Button>
+                <Button onPress={() => this.setState({ showMe: true })} style={{ width: 50, height: 20 }} >
+                        {strings.feedBack}
                 </Button>
                 </View>
                 <Modal visible={this.state.showMe} transparent onRequestClose={() => console.warn("this is a close request")} animationType="slide">
                     <View style={styles.feedback}>
                     <View style={{ marginTop: 200 }}>
+                    <Text style={{ fontSize: 20, color: "white"}}>{strings.feedback}</Text>
                         <StarRating
                             disabled={false}
                             maxStars={5}
@@ -174,8 +179,8 @@ class LocalStoryBook extends Component {
                         />
                         </View>
                          <View style={styles.feedbackbtn}>
-                            <Button style={styles.feedbackBtn} onPress={this.closeFeedback}>Submit</Button>
-                            <Button style={styles.feedbackBtn} onPress={this.cancelFeedback}>Cancel</Button>
+                            <Button style={styles.feedbackBtn} onPress={this.closeFeedback}>{strings.submit}</Button>
+                            <Button style={styles.feedbackBtn} onPress={this.cancelFeedback}>{strings.cancel}</Button>
                         </View>
                     </View>
                 </Modal>
@@ -218,7 +223,7 @@ const styles = StyleSheet.create({
         //backgroundColor: '#D3D3D3',
         marginBottom: 60,
         width: 220,
-        height: 70,
+        height: 110,
     },
     itemText: {
         color: '#FFF',

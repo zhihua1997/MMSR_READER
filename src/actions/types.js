@@ -18,3 +18,6 @@ export const FEEDBACK_FAIL = "feedback_fail";
 
 export const DOWNLOAD_SUCCESS = "download_success";
 export const DOWNLOAD_CONTENT = "download_content";
+
+export const SET_FORGETPASSWORD_TO_TRUE = "SET_FORGETPASSWORD_TO_TRUE";
+export const SET_FORGETPASSWORD_TO_FALSE = "SET_FORGETPASSWORD_TO_FALSE";
